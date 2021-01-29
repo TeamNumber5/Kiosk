@@ -1,1 +1,1 @@
-web: gunicorn Kiosk.wsgi --log-file -
+web: gunicorn Kiosk.Kiosk.wsgi --log-file -

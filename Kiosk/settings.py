@@ -25,7 +25,7 @@ SECRET_KEY = 'yq4o#n75^_1zdppc8!s)em*#jl#&opdyj9q)xnz-dggv6g#q+#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','99.73.180.225','localhost', '99.73.181.225','team-number-5-kiosk.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1','99.73.180.225','localhost', '99.73.181.225','team-number-5-kiosk.herokuapp.com', 'www.aefuentes.com', 'aefuentes.com']
 
 
 # Application definition

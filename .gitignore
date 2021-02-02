@@ -4,7 +4,7 @@ __pycache__/
 
 # C extensions
 *.so
-
+runserver.sh
 # Distribution / packaging
 .Python
 env/

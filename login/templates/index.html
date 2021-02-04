@@ -8,17 +8,19 @@
     <body>
         <div class="login-box">
             <h1>Login</h1>
+            <form  method="POST">
             <div class="textbox">
                 <i class="fa fa-user-secret" aria-hidden="true"></i>
-                <input type="text" placeholder="Username" name="" value="">
+                <input type="text" placeholder="Username" name="user_name" value="">
             </div>
             
             <div class="textbox">
                 <i class="fa fa-key" aria-hidden="true"></i>
-                <input type="password" placeholder="Password" name="" value="">
+                <input type="password" placeholder="Password" name="user_password" value="">
             </div>
-            
-            <input class= "btn" type="button" name="" value="Sign in">
+            <input class= "btn" type="submit" name="login_click" value="Sign in">
+            <input class= "btn" type="button" name="" value="Create account">
+            </form>
         </div>
     </body>
 </html>

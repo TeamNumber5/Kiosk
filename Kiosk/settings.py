@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['127.0.0.1','99.73.180.225','localhost', '99.73.181.225','team-
 # Application definition
 
 INSTALLED_APPS = [
+    'django_admin_index',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -70,7 +71,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'Kiosk.wsgi.application'
-
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
@@ -103,7 +104,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 CSRF_COOKIE_HTTPONLY = True
 CSRF_COOKIE_SECURE = False
-SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = False
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 

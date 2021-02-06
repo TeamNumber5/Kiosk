@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="{% static '/css/style.css' %}">
     </head>
     <body>
-        <div class="login-box">
+        <div id="login" class="login-box">
             <h1>Login</h1>
             <form  method="POST">
             <div class="textbox">
@@ -19,8 +19,42 @@
                 <input type="password" placeholder="Password" name="user_password" value="">
             </div>
             <input class= "btn" type="submit" name="login_click" value="Sign in">
-            <input class= "btn" type="button" name="" value="Create account">
+            <input class= "btn" type="button" name="" value="Create account" onclick="gotoCreateAccount()">
             </form>
         </div>
+        
+        <div id="createUser" class="create-user">
+            <h1>Create User</h1>
+            <form  method="POST">
+            <div class="textbox">
+                <i class="fa fa-user-secret" aria-hidden="true"></i>
+                <input type="text" placeholder="Username" name="user_name" value="">
+            </div>
+            
+            <div class="textbox">
+                <i class="fa fa-key" aria-hidden="true"></i>
+                <input type="password" placeholder="Password" name="user_password" value="">
+            </div>
+            <input class= "btn" type="submit" name="" value="Submit">
+            <input class= "btn" type="button" name="" value="Back" onclick="gotoLogin()">
+            </form>
+        </div>
+        
+        <script>
+            
+            function gotoCreateAccount()
+            {
+                document.getElementById("login").style.visibility = "hidden";
+                document.getElementById("createUser").style.visibility = "visible";
+            }
+            
+            function gotoLogin()
+            {
+                document.getElementById("createUser").style.visibility = "hidden";
+                document.getElementById("login").style.visibility = "visible";
+            }
+            
+            
+        </script>
     </body>
 </html>

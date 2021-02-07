@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
+import dj_database_url
 
 from pathlib import Path
 import os
@@ -78,12 +79,17 @@ SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'User': 'admin',
-        'Password': 'password',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd67muan8gvdldt',
+        'USER': 'wqghbqvpdxbbxh',
+        'PASSWORD': '071171f0920c4cc160e51b7d81e24d7e5052b01cc0d9f3578913f348ef598ddc',
+        'HOST': 'ec2-52-6-178-202.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
+
+prod_db  =  dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(prod_db)
 
 
 # Password validation
@@ -140,6 +146,3 @@ STATICFILES_DIRS = (
 #  Add configuration for static files storage using whitenoise
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-import dj_database_url
-prod_db  =  dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(prod_db)

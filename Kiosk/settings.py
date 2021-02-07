@@ -79,6 +79,8 @@ SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
+        'User': 'admin',
+        'Password': 'password',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }

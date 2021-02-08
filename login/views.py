@@ -15,6 +15,11 @@ def index(request):
         user_name =str(form['user_name'].value())
         user_password= str(form['user_password'].value())
 
+        # if either are empty 
+        if not user_name or not user_password:
+            return render(request, 'index.html') 
+
+
         # Query for the login info 
         login = Employee.objects.filter(first_name=user_name,  password=user_password).first()
 
@@ -32,4 +37,3 @@ def index(request):
                 employee.save()
  
     return render(request, 'index.html') 
-

@@ -6,6 +6,3 @@ urlpatterns = [
     path('', csrf_exempt(views.index), name='index'),
 ]
 
-urlpatterns += [
-    path('', include('django.contrib.auth.urls')),
-]

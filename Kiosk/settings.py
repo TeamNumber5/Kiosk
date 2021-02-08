@@ -32,13 +32,13 @@ ALLOWED_HOSTS = ['127.0.0.1','99.73.180.225','localhost', '99.73.181.225','team-
 # Application definition
 
 INSTALLED_APPS = [
-    'django_admin_index',
     'django.contrib.admin',
     'django.contrib.auth',
-    'django.contrib.contenttypes',
     'django.contrib.sessions',
+    'django.contrib.contenttypes',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
     'Kiosk',
 ]
 

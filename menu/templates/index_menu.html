@@ -4,6 +4,8 @@
 	<link rel="stylesheet" href="{% static '/css/menu.css' %}">
     <body>
         <h1 id="tmp">MENU</h1>
-        <input id="clearUsersInDatabase" type="button" value="Clear Users">
+        <form method="POST">
+        <input id="clearUsersInDatabase" type="submit" name='clear_db' value="Clear Users">
+        </form>
     </body>
 </html>

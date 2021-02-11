@@ -1,6 +1,6 @@
 ----------------------------------------
-first_name     Andre
-last_name      Fuentes
-employee_id    123
-password       123
+first_name     Cole
+last_name      Hoover
+employee_id    1
+password       1234
 role           GM

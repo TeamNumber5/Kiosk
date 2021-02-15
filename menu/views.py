@@ -1,10 +1,20 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from .forms import ResetDB
 from Kiosk.models import Employee
+from Kiosk.models import Active_Employee
 # Create your views here.
 
 def index(request):
+    auth = False
+    try:
+        session_key = request.session['session_key']
+        if session_key:    
+            auth = Active_Employee.objects.filter(session_key=request.session['session_key']).first()
+    except:
+        pass
+
+
     if request.method == 'POST':
 
         form = ResetDB(request.POST)
@@ -16,5 +26,7 @@ def index(request):
                 user.delete()
 
             
-
-    return render(request, 'index_menu.html')
+    if auth:
+        return render(request, 'index_menu.html')
+    else:
+        return HttpResponseRedirect('/login/')

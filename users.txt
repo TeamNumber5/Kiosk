@@ -4,9 +4,3 @@ last_name      Hoover
 employee_id    1
 password       1234
 role           GM
-----------------------------------------
-first_name     Byron
-last_name      Denham
-employee_id    9
-password       333
-role           u

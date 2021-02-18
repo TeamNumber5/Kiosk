@@ -29,16 +29,16 @@ def index(request):
             # Login form
             form = SubmitLogin(request.POST)
             # Login info
-            user_name =str(form['user_name'].value())
+            employee_id =str(form['employee_id'].value())
             user_password= str(form['user_password'].value())
 
             # if either are empty 
-            if not user_name or not user_password:
+            if not employee_id or not user_password:
                 return render(request, 'index.html') 
 
 
             # Query for the login info 
-            login = Employee.objects.filter(employee_id=user_name,  password=user_password).first()
+            login = Employee.objects.filter(employee_id=employee_id,  password=user_password).first()
 
             # If a user is found assign him to his old session or create a new active user session
             if login:

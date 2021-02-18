@@ -27,7 +27,9 @@ class Employee(models.Model):
 
 class Active_Employee(models.Model):
     
-    record_id = models.IntegerField()
+    record_id = models.IntegerField(default= 0)
+
+    employee_id = models.IntegerField(default=0)
 
     name = models.TextField()
 
@@ -40,6 +42,6 @@ class Active_Employee(models.Model):
 
     session_key = models.TextField()
 
-    created_on = models.DateField()
+    created_on = models.DateField(auto_now_add=True)
 
 

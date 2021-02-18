@@ -1,6 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from Kiosk.models import Employee
+from Kiosk.models import Active_Employee
+
+import random
+import string
 
 # Create your views here.
 from .forms import SubmitLogin
@@ -36,7 +40,26 @@ def index(request):
             # Query for the login info 
             login = Employee.objects.filter(employee_id=user_name,  password=user_password).first()
 
+            # If a user is found assign him to his old session or create a new active user session
             if login:
+                session_key = ''.join(random.choice(string.ascii_lowercase) for i in range(10))
+                name = login.first_name
+                employee_id = login.employee_id
+                role = login.role
+               
+                """
+                This is just checking to see if user is already logged in and didn't log out
+                """
+                logged_in = Active_Employee.objects.filter(employee_id=employee_id).first()
+
+                if logged_in:
+                    request.session['session_key'] = logged_in.session_key
+                    return HttpResponseRedirect('/menu/')
+                
+                active_employee = Active_Employee.objects.create(employee_id=employee_id, name=name, role=role, session_key=session_key)
+                active_employee.save()
+
+                request.session['session_key'] = session_key
                 # If so direct them to the menu
                 return HttpResponseRedirect('/menu/')
 

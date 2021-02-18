@@ -6,20 +6,21 @@
 	{% load static %}
 	<link rel="stylesheet" href="{% static '/css/menu.css' %}">
     <body>
-<<<<<<< HEAD
-=======
         <h1 id="tmp">MENU</h1>
 	<div>
->>>>>>> d0f364dc8fbd5079c051cd2bdd1f58a19959948f
         <form method="POST">
         <input id="clearUsersInDatabase" type="submit" name='clear_db' value="Clear Users">
         </form>
         <div class="container">
-            <button class="button">Start Transaction</button>
-            <button class="button">View Products</button>
-            <button class="button">Create Employee</button>
-            <button class="button">Sales Report</button>
-            <button class="button">Cashieer Report</button>
+            <div class="cashier_buttons">
+                <button class="cashier_button">Start</br>Transaction</button>
+                <button class="cashier_button">View</br>Products</button>
+            </div>
+            <div class="manager_buttons">
+                <button class="manager_button">Create Employee</button>
+                <button class="manager_button">Sales Report</button>
+                <button class="manager_button">Cashier Report</button>
+            </div>
         </div>
     </body>
 </html>

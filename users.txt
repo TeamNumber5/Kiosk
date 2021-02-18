@@ -5,8 +5,8 @@ employee_id    1
 password       1234
 role           GM
 ----------------------------------------
-first_name     Byron
-last_name      Denham
-employee_id    9
-password       333
-role           u
+first_name     Corbett
+last_name      Stephens
+employee_id    69
+password       go
+role           GM

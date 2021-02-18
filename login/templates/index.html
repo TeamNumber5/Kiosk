@@ -77,6 +77,22 @@
 		//	the appropiate pop up notification if the entry is incorrect.
 	    }
             
+           
+        function init(){
+            if ({{ no_users }} == 1){
+                gotoCreateAccount();
+            }
+            else if ({{ valid_info }} == 0){
+                gotoCreateAccount();
+            }
+            else{
+                gotoLogin();
+            }
+            
+        }
+        
+        init()
+            
         </script>
     </body>
 </html>

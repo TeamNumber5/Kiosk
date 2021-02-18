@@ -8,7 +8,7 @@ from Kiosk.models import Active_Employee
 def index(request):
     auth = False
     try:
-        session_key = request.session['session_key']
+        session_key = request.session.get('session_key')
         if session_key:    
             auth = Active_Employee.objects.filter(session_key=request.session['session_key']).first()
     except:

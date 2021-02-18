@@ -23,6 +23,40 @@ def index(request):
             print ('password '.ljust(15, ' ') + str(item.password), file=user)
             print ('role '.ljust(15, ' ') + str(item.role),  file=user)
 
+    
+    if request.method == 'POST':
+        
+        # on create account  click, create the account if the user is not found
+        if 'create_click' in request.POST:     
+            form = CreateUser(request.POST)
+
+            first_name =str(form['first_name'].value())
+            last_name = str(form['last_name'].value())
+            user_password= str(form['user_password'].value())
+            
+            employee_id = int(form['employee_id'].value())
+
+            
+            role = str(form['role'].value())
+
+            for user in users:
+                if employee_id == int(user.employee_id):
+                    return render(request, 'index.html', {'no_users' : 0, 'valid_info' : 0})
+
+            employee = Employee.objects.create(first_name=first_name,last_name=last_name, employee_id=employee_id, password=user_password, role=role)
+            
+            if role == 'GM' or role == 'SM':
+                employee.manager = employee_id
+
+            employee.save()
+            return render(request, 'index.html', {'no_users' : 0, 'valid_info' : 1})
+ 
+
+
+
+    if len(users) == 0:
+        return render(request, 'index.html', {'no_users' : 1, 'valid_info' : 0})
+
     if request.method == 'POST':
         
         if 'login_click' in request.POST:
@@ -67,23 +101,4 @@ def index(request):
                 return HttpResponseRedirect('/menu/')
 
 
-        # on create account  click, create the account if the user is not found
-        elif 'create_click' in request.POST:     
-            form = CreateUser(request.POST)
-
-            first_name =str(form['first_name'].value())
-            last_name = str(form['last_name'].value())
-            user_password= str(form['user_password'].value())
-            
-            employee_id = int(form['employee_id'].value())
-            
-            role = str(form['role'].value())
-
-            employee = Employee.objects.create(first_name=first_name,last_name=last_name, employee_id=employee_id, password=user_password, role=role)
-            
-            if role == 'GM' or role == 'SM':
-                employee.manager = employee_id
-
-            employee.save()
- 
-    return render(request, 'index.html') 
+    return render(request, 'index.html', {'no_users' : 0, 'valid_info' : 1}) 

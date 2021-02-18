@@ -29,11 +29,14 @@ def index(request):
             # Login form
             form = SubmitLogin(request.POST)
             # Login info
-            employee_id =str(form['employee_id'].value())
-            user_password= str(form['user_password'].value())
-
-            # if either are empty 
-            if not employee_id or not user_password:
+            try:
+                employee_id =int(str(form['employee_id'].value()))
+                user_password= str(form['user_password'].value())
+            except:
+                print('Logon error')
+                return
+            
+            if employee_id == None or user_password == None:
                 return render(request, 'index.html') 
 
 
@@ -77,6 +80,10 @@ def index(request):
             role = str(form['role'].value())
 
             employee = Employee.objects.create(first_name=first_name,last_name=last_name, employee_id=employee_id, password=user_password, role=role)
+            
+            if role == 'GM' or role == 'SM':
+                employee.manager = employee_id
+
             employee.save()
  
     return render(request, 'index.html') 

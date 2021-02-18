@@ -1,12 +1,30 @@
 ----------------------------------------
-first_name     Cole
-last_name      Hoover
+first_name     Andre
+last_name      Fuentes
 employee_id    1
 password       1234
 role           GM
 ----------------------------------------
 first_name     Corbett
 last_name      Stephens
-employee_id    69
+employee_id    7
+password       go
+role           gm
+----------------------------------------
+first_name     Corbett
+last_name      Stephens
+employee_id    7
+password       go
+role           gm
+----------------------------------------
+first_name     Corbett
+last_name      Stephens
+employee_id    7
+password       go
+role           gm
+----------------------------------------
+first_name     Corbett
+last_name      Stephens
+employee_id    7
 password       go
 role           GM

@@ -24,6 +24,8 @@ class Employee(models.Model):
 
     role = models.CharField(max_length=2, choices= Role.choices, default=Role.cashier)
 
+    manager = models.IntegerField(blank=True, null=True)
+
     password = models.TextField()
 
     # Django auto timestamp creation of user (doens't update upon login)

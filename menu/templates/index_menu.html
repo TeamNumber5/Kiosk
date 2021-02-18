@@ -12,11 +12,29 @@
         <input id="clearUsersInDatabase" type="submit" name='clear_db' value="Clear Users">
         </form>
         <div class="container">
-            <button class="button">Start Transaction</button>
-            <button class="button">View Products</button>
-            <button class="button">Create Employee</button>
-            <button class="button">Sales Report</button>
-            <button class="button">Cashieer Report</button>
+            <button class="button" id="startTransaction">Start Transaction</button> 
+            <button class="button" id="viewProducts">View Products</button>
+            <button class="button" id="createEmployee">Create Employee</button>
+            <button class="button" id="salesReport">Sales Report</button>
+            <button class="button" id="cashierReport">Cashier Report</button>
         </div>
+
+    <script>
+    	
+    	document.addEventListener('DOMContentLoaded', clickHandling);
+
+    	function clickHandling() {
+    		document.getElementById("startTransaction").addEventListener('click', displayError);
+    		document.getElementById("viewProducts").addEventListener('click', displayError);
+    		document.getElementById("createEmployee").addEventListener('click', displayError);
+    		document.getElementById("salesReport").addEventListener('click', displayError);
+    		document.getElementById("cashierReport").addEventListener('click', displayError);
+    	}
+
+    	function displayError() {
+    		alert("Functionality has not been implemented yet.");
+    	}
+
+    </script>
     </body>
 </html>

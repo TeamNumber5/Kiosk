@@ -13,14 +13,32 @@
         </form>
         <div class="container">
             <div class="cashier_buttons">
-                <button class="cashier_button">Start</br>Transaction</button>
-                <button class="cashier_button">View</br>Products</button>
+                <button class="cashier_button" id="startTransaction">Start</br>Transaction</button>
+                <button class="cashier_button" id="viewProducts">View</br>Products</button>
             </div>
             <div class="manager_buttons">
-                <button class="manager_button">Create Employee</button>
-                <button class="manager_button">Sales Report</button>
-                <button class="manager_button">Cashier Report</button>
+                <button class="manager_button" id="createEmployee">Create Employee</button>
+                <button class="manager_button" id="salesReport">Sales Report</button>
+                <button class="manager_button" id="cashierReport">Cashier Report</button>
             </div>
         </div>
+
+    <script>
+    	
+    	document.addEventListener('DOMContentLoaded', clickHandling);
+
+    	function clickHandling() {
+    		document.getElementById("startTransaction").addEventListener('click', displayError);
+    		document.getElementById("viewProducts").addEventListener('click', displayError);
+    		document.getElementById("createEmployee").addEventListener('click', displayError);
+    		document.getElementById("salesReport").addEventListener('click', displayError);
+    		document.getElementById("cashierReport").addEventListener('click', displayError);
+    	}
+
+    	function displayError() {
+    		alert("Functionality has not been implemented yet.");
+    	}
+
+    </script>
     </body>
 </html>

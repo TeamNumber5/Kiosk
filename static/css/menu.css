@@ -1,13 +1,46 @@
 body {
     background-color: bisque;
 }
+
 .container {
     visibility: visible;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 100px;
+    text-align: center;
+/*    border-style: solid;*/
+}
+
+.cashier_buttons {
+    position: relative;
+/*    border-style: solid;*/
+    display: inline-block;
+    margin: 30px;
+    width: 800px;
+    height: 400px;
+}
+
+.cashier_button {
+    display: inline-block;
+    position: relative;
+    font-size: 60px;
+    margin: 10px;
+    width: 340px;
+    height: 380px;
+}
+
+.manager_buttons {
+    display: inline-block;
+    position: relative;
+}
+
+.manager_button {
+    display: inline-block;
+    position: relative;
+    width: 233px;
+    height: 200px;
+    font-size: 20px;
 }
 
 #clearUsersInDatabase {

@@ -25,33 +25,33 @@
         
         <div id="createUser" class="create-user">
             <h1>Create User</h1>
-            <form  method="POST">
+            <form onsubmit="return validateForm()" method="POST">
                 
             <div class="textbox">
                  <i class="fa fa-tag" aria-hidden="true"></i>
-                <input type="text" placeholder="Firstname" name="first_name" value="">
+                <input type="text" placeholder="Firstname" name="first_name" value=""required>
             </div>    
                 
             <div class="textbox">
                 <i class="fa fa-tags" aria-hidden="true"></i>
-                <input type="text" placeholder="Lastname" name="last_name" value="">
+                <input type="text" placeholder="Lastname" name="last_name" value="" required>
             </div> 
                 
             <div class="textbox">
                 <i class="fa fa-id-card-o" aria-hidden="true"></i>
-                <input type="text" placeholder="Employee ID" name="employee_id" value="">
+                <input type="text" placeholder="Employee ID" name="employee_id" value="" required>
             </div>
                 
             <div class="textbox">
                 <i class="fa fa-street-view" aria-hidden="true"></i>
-                <input type="text" placeholder="Role" name="role" value="">
+                <input type="text" placeholder="Role" name="role" value="" required>
             </div> 
             
             <div class="textbox">
                 <i class="fa fa-key" aria-hidden="true"></i>
-                <input type="password" placeholder="Password" name="user_password" value="">
+                <input type="password" placeholder="Password" name="user_password" value="" required>
             </div>
-            <input class= "btn" type="submit" name="create_click" value="Create Account">
+            <input class= "btn" type="submit" name="create_click" value="Create Account" onclick="validateForm()">
             <input class= "btn" type="button" name="" value="Back" onclick="gotoLogin()">
             </form>
         </div>
@@ -69,12 +69,25 @@
                 document.getElementById("createUser").style.visibility = "hidden";
                 document.getElementById("login").style.visibility = "visible";
             }
-	    function checkValid()
+
+	    function validateForm()
 	    {
-	    	//this method will check the validity of the create account / login entries
-		//
-		//	The error checking in this method will consist of type checking and will give
-		//	the appropiate pop up notification if the entry is incorrect.
+		//This method will validate the entries of the form -> allow for the restriction of different fields
+		//This method by definition will be false although validForm is initialized to true --> the do loop will catch the required fields
+		//CURRENTLY WORK IN PROGRESS, experimenting between using "onclick" metho and "onsubmit" method for this particular problem
+		var validForm = true;
+		do{
+			if(document.getElementById("role") == "GM")
+			{
+				validForm = false;
+			}
+			else if(document.getElementById("employee_id") == "")
+			{
+				validForm = false;
+			}
+		}
+		while(!validForm)
+		    
 	    }
             
         </script>

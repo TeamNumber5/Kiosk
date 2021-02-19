@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from Kiosk.models import Employee
 from Kiosk.models import Active_Employee
+import json
 
 import random
 import string

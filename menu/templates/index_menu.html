@@ -12,10 +12,12 @@
             <div class="account">
                 <button>Account</button>
                 <ul>
-                    <li><a href="#">firstname lastname</a></li>
-                    <li><a href="#">employeeid</a></li>
-                    <li><a href="#">role</a></li>
-                    <li><a href="#">Logout</a></li>
+                    <li><a>{{first_name}} {{last_name}}</a></li>
+                    <li><a>{{employee_id}}</a></li>
+                    <li><a>{{role}}</a></li>
+                    <form method="POST">
+                        <li><button type="submit" name="logout_click">Logout</a></li>
+                    </form>
                 </ul>
             </div>
         </div>

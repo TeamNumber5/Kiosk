@@ -101,6 +101,7 @@ body {
     width: 340px;
     height: 380px;
     cursor: pointer;
+    border-radius: 5px;
 }
 
 .manager_buttons {
@@ -114,8 +115,9 @@ body {
     position: relative;
     width: 233px;
     height: 200px;
-    font-size: 20px;
+    font-size: 25px;
     cursor: pointer;
+    border-radius: 5px;
 }
 
 #clearUsersInDatabase {

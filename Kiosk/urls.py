@@ -16,8 +16,13 @@ Including another URLconf
 from django.urls import include, path
 from django.shortcuts import redirect
 
+from menu.views import productListing, employeeDetail
+
 urlpatterns = [
     path('', lambda request: redirect('login/', permanent=False)),
     path('login/', include('login.urls')),
     path('menu/', include('menu.urls')),
+    path('productListing/', productListing),
+    path('employeeDetail/', employeeDetail),
+
 ]

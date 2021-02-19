@@ -30,3 +30,9 @@ def index(request):
         return render(request, 'index_menu.html')
     else:
         return HttpResponseRedirect('/login/')
+
+def productListing(request):
+    return render(request, 'productListing.html')
+
+def employeeDetail(request):
+    return render(request, 'employeeDetail.html')

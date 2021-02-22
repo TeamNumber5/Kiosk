@@ -1,5 +1,3 @@
-
-    
 function gotoCreateAccount()
 {
     document.getElementById("login").style.visibility = "hidden";
@@ -19,6 +17,7 @@ function validateForm()
 //CURRENTLY WORK IN PROGRESS, experimenting between using "onclick" metho and "onsubmit" method for this particular problem
     var validForm = true;
     do{
+
     if(document.getElementById("role") == "GM")
     {
         validForm = false;
@@ -33,11 +32,12 @@ function validateForm()
 }
 
 
-function init(){
-    if ({{ no_users }} == 1){
+function init(no_users, valid_info){
+
+    if (no_users == 1){
         gotoCreateAccount();
     }
-    else if ({{ valid_info }} == 0){
+    else if (valid_info == 0){
         gotoCreateAccount();
     }
     else{
@@ -46,5 +46,4 @@ function init(){
 
 }
 
-init()
-            
+

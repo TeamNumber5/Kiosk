@@ -19,7 +19,7 @@
                 <input type="password" placeholder="Password" name="user_password" value="">
             </div>
             <input class= "btn" type="submit" name="login_click" value="Sign in">
-            <input class= "btn" type="button" name="" value="Create account" onclick="gotoCreateAccount()">
+            <input id="go_to_create_account"  class= "btn" type="button" onclick="gotoCreateAccount()" name="go_to_create_account" value="Create account" >
             </form>
         </div>
         
@@ -51,11 +51,16 @@
                 <i class="fa fa-key" aria-hidden="true"></i>
                 <input type="password" placeholder="Password" name="user_password" value="" required>
             </div>
-            <input class= "btn" type="submit" name="create_click" value="Create Account" onclick="validateForm()">
+            <input class= "btn" type="submit" name="create_click" value="Create Account" onclick="validateForm()"> 
             <input class= "btn" type="button" name="" value="Back" onclick="gotoLogin()">
             </form>
         </div>
-        
-    <script type="text/javascript" src="{% static '/scripts/index.js' %}"></script>
+    <script type="text/javascript" data-no_users="{{no_users}}" data-valid_info="{{valid_info}}" src="{% static '/scripts/index.js' %}">
+    </script>
+    <script type="text/javascript"> 
+        no_users = {{no_users}};
+        valid_info = {{valid_info}};
+        init(no_users,valid_info);
+    </script>
     </body>
 </html>

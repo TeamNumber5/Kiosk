@@ -8,7 +8,7 @@
     <body>
         <div id="login" class="login-box">
             <h1>Login</h1>
-            <form  method="POST">
+            <form onsubmit="return validateLogin()"  method="POST">
             <div class="textbox">
                 <i class="fa fa-user-secret" aria-hidden="true"></i>
                 <input type="text" id="employee_id" placeholder="Username" name="employee_id" value="">

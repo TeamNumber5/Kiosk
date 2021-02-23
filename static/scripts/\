@@ -18,11 +18,10 @@ function isNumeric(value)
 
 function validateLogin()
 {
-	// if isNumeric returns true, proceed with POST request, otherwise, display error message
-	if(isNumeric(document.getElementById("employee_id").value))
-	{
-	
-	}
+
+	var validForm = true;
+
+	console.log(document.getElementById("employee_id")i)
 
 }
 

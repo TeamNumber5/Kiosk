@@ -11,12 +11,12 @@
             <form  method="POST">
             <div class="textbox">
                 <i class="fa fa-user-secret" aria-hidden="true"></i>
-                <input type="text" placeholder="Username" name="employee_id" value="">
+                <input type="text" id="employee_id" placeholder="Username" name="employee_id" value="">
             </div>
             
             <div class="textbox">
                 <i class="fa fa-key" aria-hidden="true"></i>
-                <input type="password" placeholder="Password" name="user_password" value="">
+                <input type="password" id="user_password" placeholder="Password" name="user_password" value="">
             </div>
             <input class= "btn" type="submit" name="login_click" value="Sign in">
             <input id="go_to_create_account"  class= "btn" type="button" onclick="gotoCreateAccount()" name="go_to_create_account" value="Create account" >
@@ -34,22 +34,22 @@
                 
             <div class="textbox">
                 <i class="fa fa-tags" aria-hidden="true"></i>
-                <input type="text" placeholder="Lastname" name="last_name" value="" required>
+                <input type="text" placeholder="Lastname" id="last_name" name="last_name" value="" required>
             </div> 
                 
             <div class="textbox">
                 <i class="fa fa-id-card-o" aria-hidden="true"></i>
-                <input type="text" placeholder="Employee ID" name="employee_id" value="" required>
+                <input type="text" placeholder="Employee ID" id="employee_id"  name="employee_id" value="" required>
             </div>
                 
             <div class="textbox">
                 <i class="fa fa-street-view" aria-hidden="true"></i>
-                <input type="text" placeholder="Role" name="role" value="" required>
+                <input type="text" placeholder="Role" id="role" name="role" value="" required>
             </div> 
             
             <div class="textbox">
                 <i class="fa fa-key" aria-hidden="true"></i>
-                <input type="password" placeholder="Password" name="user_password" value="" required>
+                <input type="password" placeholder="Password" id="user_password" name="user_password" value="" required>
             </div>
             <input class= "btn" type="submit" name="create_click" value="Create Account" onclick="validateForm()"> 
             <input class= "btn" type="button" name="" value="Back" onclick="gotoLogin()">

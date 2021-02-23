@@ -5,6 +5,7 @@ class SubmitLogin(forms.Form):
     user_password = forms.CharField(label='user_password',max_length=100)
 
 
+
 class CreateUser(forms.Form):
     first_name = forms.CharField(label='first_name', max_length=100)
     last_name = forms.CharField(label='last_name', max_length=100)

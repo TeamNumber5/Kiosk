@@ -8,7 +8,6 @@
     <body>
         <div id="login" class="login-box">
             <h1>Login</h1>
-            <form onsubmit="return validateLogin()"  method="POST">
             <div class="textbox">
                 <i class="fa fa-user-secret" aria-hidden="true"></i>
                 <input type="text" id="employee_id" placeholder="Username" name="employee_id" value="">
@@ -18,9 +17,8 @@
                 <i class="fa fa-key" aria-hidden="true"></i>
                 <input type="password" id="user_password" placeholder="Password" name="user_password" value="">
             </div>
-            <input class= "btn" type="submit" name="login_click" value="Sign in">
+            <input class= "btn" type="button" name="login_click" onclick="validateLogin()" value="Sign in">
             <input id="go_to_create_account"  class= "btn" type="button" onclick="gotoCreateAccount()" name="go_to_create_account" value="Create account" >
-            </form>
         </div>
         
         <div id="createUser" class="create-user">

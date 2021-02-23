@@ -26,7 +26,6 @@ def index(request):
 
     
     if request.method == 'POST':
-        
         # on create account  click, create the account if the user is not found
         if 'create_click' in request.POST:     
             form = CreateUser(request.POST)
@@ -59,7 +58,6 @@ def index(request):
         return render(request, 'index.html', {'no_users' : 1, 'valid_info' : 0})
 
     if request.method == 'POST':
-        
         if 'login_click' in request.POST:
             # Login form
             form = SubmitLogin(request.POST)

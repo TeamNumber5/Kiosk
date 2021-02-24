@@ -10,6 +10,32 @@ function gotoLogin()
     document.getElementById("login").style.visibility = "visible";
 }
 
+function post(params, form_name) {
+
+  const form = document.createElement('form');
+  form.method = 'POST';
+  form.action = window.location.href;
+
+  for (const key in params) {
+    if (params.hasOwnProperty(key)) {
+      const hiddenField = document.createElement('input');
+      hiddenField.type = 'hidden';
+      hiddenField.name = key;
+      hiddenField.value = params[key];
+
+      form.appendChild(hiddenField);
+    }
+  }
+  const hiddenField = document.createElement('input');
+  hiddenField.type = 'hidden';
+  hiddenField.name = form_name;
+  form.appendChild(hiddenField);
+  
+  document.body.appendChild(form);
+  form.submit();
+}
+
+
 function isNumeric(value)
 {
 	return /^\d+$/.test(value);
@@ -18,38 +44,24 @@ function isNumeric(value)
 
 function validateLogin()
 {
+    let id = document.getElementById("employee_id").value;
+    let password = document.getElementById("user_password").value;
 	// if isNumeric returns true, proceed with POST request, otherwise, display error message
-	if(isNumeric(document.getElementById("employee_id").value))
-	{
-        let id = document.getElementById("employee_id").value;
-        let password = document.getElementById("user_password").value;
-        
-        const form = document.createElement('form');
-        form.method = 'POST';
-        form.action = window.location.href;
-
-        let hiddenField_one = document.createElement('input');
-        hiddenField_one.type = 'hidden';
-        hiddenField_one.name = 'employee_id';
-        hiddenField_one.value = id;
-        form.appendChild(hiddenField_one);
-
-        let hiddenField_two = document.createElement('input');
-        hiddenField_two.type = 'hidden'; 
-        hiddenField_two.name = 'user_password';
-        hiddenField_two.value = password;
-        form.appendChild(hiddenField_two);
-
-        let hiddenField_three = document.createElement('input');
-        hiddenField_three.name = 'login_click';
-        form.appendChild(hiddenField_three);
-
-        document.body.appendChild(form);
-        form.submit();	
-	}
-    else {
-        alert('Bad Login');
+    if (!isNumeric(id)){
+        if (password == ""){
+            alert('Username and Password invalid. Username must be digits, and password cannot be blank.');
+        }
+        else{
+            alert('Username invalid. Must be digits.');
+        }
     }
+    else if (password == ""){
+        alert('Password must not be blank.');
+    }
+    else{
+        payload = {employee_id : id, user_password : password};
+        post(payload, 'login_click');
+	}
 }
 
 

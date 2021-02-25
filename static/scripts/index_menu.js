@@ -42,9 +42,8 @@ function displayError() {
 }
 
 function logout_click(){
-    params = {}
-
-    post(params, 'logout_click')
+    params = {};
+    post(params, 'logout_click');
 
 }
 

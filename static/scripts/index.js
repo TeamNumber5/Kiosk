@@ -59,11 +59,12 @@ function validateLogin()
         if (password == ""){
             document.getElementById("id_error").style.display = "";
             document.getElementById("password_error").style.display = "";
-            document.getElementById("id_error").style.visibility = "visible"
+            document.getElementById("password_error").style.visibility = "visible";
+            document.getElementById("id_error").style.visibility = "visible";
         }
         else{
             document.getElementById("id_error").style.display = "";
-            document.getElementById("id_error").style.visibility = "visible"
+            document.getElementById("id_error").style.visibility = "visible";
         }
     }
     else if (password == ""){

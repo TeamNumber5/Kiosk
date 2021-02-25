@@ -11,6 +11,19 @@ import string
 from .forms import SubmitLogin
 from .forms import CreateUser
 
+def validate_create_user(first_name, last_name,employee_id, user_password, role):
+    valid = True
+
+    if not first_name.isalpha() or first_name == '' or not last_name.isalpha() or last_name == '':
+        valid = False
+    if len(str(employee_id)) != 5:
+        valid = False
+    if user_password == "":
+        valid = False
+    if role != 'GM' and role != 'SM' and role != 'CS':
+        valid = False
+    return valid
+
 
 def index(request):
     # Request is type post
@@ -23,41 +36,47 @@ def index(request):
             print ('employee_id '.ljust(15, ' ') + str(item.employee_id),file=user)
             print ('password '.ljust(15, ' ') + str(item.password), file=user)
             print ('role '.ljust(15, ' ') + str(item.role),  file=user)
+    context = { 'no_users' : 0, 'valid_info' : 1, 'invalid_login' : 'none' }
 
-    
+
+    if len(users) == 0:
+        context['no_users']= 1
+
     if request.method == 'POST':
         # on create account  click, create the account if the user is not found
         if 'create_click' in request.POST:     
             form = CreateUser(request.POST)
+            try:
+                first_name =str(form['first_name'].value())
+                last_name = str(form['last_name'].value())
+                user_password= str(form['user_password'].value())
+                
+                employee_id = int(form['employee_id'].value())
 
-            first_name =str(form['first_name'].value())
-            last_name = str(form['last_name'].value())
-            user_password= str(form['user_password'].value())
-            
-            employee_id = int(form['employee_id'].value())
+                
+                role = str(form['role'].value())
+            except:
+                context['valid_info'] = 0
+                return render(request, 'index.html', context)
 
-            
-            role = str(form['role'].value())
-
+            # Checks if user ID is already taken
             for user in users:
                 if employee_id == int(user.employee_id):
-                    return render(request, 'index.html', {'no_users' : 0, 'valid_info' : 0})
+                    context['valid_info'] = 0
+                    return render(request, 'index.html', context)
 
-            employee = Employee.objects.create(first_name=first_name,last_name=last_name, employee_id=employee_id, password=user_password, role=role)
-            
-            if role == 'GM' or role == 'SM':
-                employee.manager = employee_id
+            if validate_create_user(first_name, last_name, employee_id, user_password, role):
+                employee = Employee.objects.create(first_name=first_name,last_name=last_name, employee_id=employee_id, password=user_password, role=role)
+                if role == 'GM' or role == 'SM':
+                    employee.manager = employee_id
+                employee.save()
 
-            employee.save()
-            return render(request, 'index.html', {'no_users' : 0, 'valid_info' : 1})
- 
+            else:
+                context['valid_info'] = 0
+                return render(request, 'index.html', context)
 
 
 
-    if len(users) == 0:
-        return render(request, 'index.html', {'no_users' : 1, 'valid_info' : 0})
-
-    if request.method == 'POST':
         if 'login_click' in request.POST:
             # Login form
             form = SubmitLogin(request.POST)
@@ -67,11 +86,7 @@ def index(request):
                 user_password= str(form['user_password'].value())
             except:
                 print('Logon error')
-                return
             
-            if employee_id == None or user_password == None:
-                return render(request, 'index.html') 
-
 
             # Query for the login info 
             login = Employee.objects.filter(employee_id=employee_id,  password=user_password).first()
@@ -98,6 +113,7 @@ def index(request):
                 request.session['session_key'] = session_key
                 # If so direct them to the menu
                 return HttpResponseRedirect('/menu/')
+            else:
+                context['invalid_login'] = ''
 
-
-    return render(request, 'index.html', {'no_users' : 0, 'valid_info' : 1}) 
+    return render(request, 'index.html', context) 

@@ -12,14 +12,18 @@
                 <i class="fa fa-user-secret" aria-hidden="true"></i>
                 <input type="text" id="employee_id" placeholder="Username" name="employee_id" value="">
             </div>
+            <div id="id_error" style="display: none" class="error_msg">Error: Username must be numerical</div>
             
             <div class="textbox">
                 <i class="fa fa-key" aria-hidden="true"></i>
                 <input type="password" id="user_password" placeholder="Password" name="user_password" value="">
             </div>
+            <div id="password_error" style="display: none" class="error_msg">Error: Password cannot be blank</div>
+
+            <div id="login_error" style="display: {{invalid_login}}; visibility: visible" class="error_msg">Username and/or password not found</div>
+
             <input class= "btn" type="button" name="login_click" onclick="validateLogin()" value="Sign in">
             <input id="go_to_create_account"  class= "btn" type="button" onclick="gotoCreateAccount()" name="go_to_create_account" value="Create account" >
-            <div  style="visibility: hidden" class="error_msg">Error: Incorrect Username or Password</div>
         </div>
         
         <div id="createUser" class="create-user">
@@ -30,30 +34,38 @@
                  <i class="fa fa-tag" aria-hidden="true"></i>
                 <input type="text" placeholder="Firstname" name="first_name" value=""required>
             </div>    
+            <div id="fname_error" style="display: none" class="error_msg">Error: First name cannot be blank</div>
                 
             <div class="textbox">
                 <i class="fa fa-tags" aria-hidden="true"></i>
                 <input type="text" placeholder="Lastname" id="last_name" name="last_name" value="" required>
-            </div> 
-                
+            </div>     
+            <div id="lname_error" style="display: none" class="error_msg">Error: Last name cannot be blank</div>
+
             <div class="textbox">
                 <i class="fa fa-id-card-o" aria-hidden="true"></i>
                 <input type="text" placeholder="Employee ID" id="employee_id"  name="employee_id" value="" required>
             </div>
+            <div id="uid_error" style="display: none" class="error_msg">Error: Employee ID is not unique</div>
+            <div id="cid_error" style="display: none" class="error_msg">Error: Employee ID must be 5 digits</div>
                 
             <div class="textbox">
                 <i class="fa fa-street-view" aria-hidden="true"></i>
                 <input type="text" placeholder="Role" id="role" name="role" value="" required>
             </div> 
+            <div id="role_error" style="display: none" class="error_msg">Error: Role must be "GM SM or CS"</div>
             
             <div class="textbox">
                 <i class="fa fa-key" aria-hidden="true"></i>
                 <input type="password" placeholder="Password" id="user_password" name="user_password" value="" required>
             </div>
+            <div id="cpassword_error" style="display: none" class="error_msg">Error: Password cannot be blank</div>
+
+
             <input class= "btn" type="submit" name="create_click" value="Create Account" onclick="validateForm()"> 
             <input class= "btn" type="button" name="" value="Back" onclick="gotoLogin()">
             </form>
-            <div style="visibility: hidden" class="error_msg">Error: Try Again</div>
+            <div style="display: none" class="error_msg">Error: Try Again</div>
         </div>
     <script type="text/javascript" data-no_users="{{no_users}}" data-valid_info="{{valid_info}}" src="{% static '/scripts/index.js' %}">
     </script>

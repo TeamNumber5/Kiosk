@@ -2,6 +2,11 @@ function gotoCreateAccount()
 {
     document.getElementById("login").style.visibility = "hidden";
     document.getElementById("createUser").style.visibility = "visible";
+
+    document.getElementById("id_error").style.display = "none";
+    document.getElementById("password_error").style.display = "none";
+    document.getElementById("login_error").style.display = "none";
+    document.getElementById("login_error").style.visibility = "hidden";
 }
 
 function gotoLogin()
@@ -55,7 +60,6 @@ function validateLogin()
             document.getElementById("id_error").style.display = "";
             document.getElementById("password_error").style.display = "";
             document.getElementById("id_error").style.visibility = "visible"
-            document.getElementById("password_error").style.visibility = "visible"
         }
         else{
             document.getElementById("id_error").style.display = "";

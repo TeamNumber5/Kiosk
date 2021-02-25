@@ -93,6 +93,7 @@ body {
     cursor: pointer;
 }
 
+/*CSS FOR WHEN MANAGER IS LOGGED IN*/
 .cashier_button {
     display: inline-block;
     position: relative;
@@ -101,8 +102,21 @@ body {
     width: 340px;
     height: 380px;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 25px;
 }
+
+/*CSS FOR WHEN CASHIER IS LOGGED IN
+.cashier_button {
+    display: inline-block;
+    position: relative;
+    font-size: 60px;
+    margin: 10px;
+    width: 340px;
+    height: 380px;
+    cursor: pointer;
+    border-radius: 25px;
+    transform: translate(-0%, 25%);
+}*/
 
 .manager_buttons {
     display: inline-block;
@@ -110,6 +124,7 @@ body {
     cursor: pointer;
 }
 
+/*CSS FOR WHEN MANAGER IS LOGGED IN*/
 .manager_button {
     display: inline-block;
     position: relative;
@@ -117,8 +132,19 @@ body {
     height: 200px;
     font-size: 25px;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 25px;
 }
+
+/*CSS FOR WHEN CASHIER IS LOGGED IN
+.manager_button {
+    visibility: hidden;
+    display: inline-block;
+    position: relative;
+    width: 233px;
+    height: 200px;
+    font-size: 25px;
+    border-radius: 25px;
+}*/
 
 #clearUsersInDatabase {
     position: fixed;

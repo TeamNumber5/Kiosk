@@ -19,11 +19,7 @@
             </div>
             <input class= "btn" type="button" name="login_click" onclick="validateLogin()" value="Sign in">
             <input id="go_to_create_account"  class= "btn" type="button" onclick="gotoCreateAccount()" name="go_to_create_account" value="Create account" >
-<<<<<<< HEAD
-            </form>
-            <div class="error_msg">Error: Incorrect Username or Password</div>
-=======
->>>>>>> loginval
+            <div  style="visibility: hidden" class="error_msg">Error: Incorrect Username or Password</div>
         </div>
         
         <div id="createUser" class="create-user">
@@ -57,7 +53,7 @@
             <input class= "btn" type="submit" name="create_click" value="Create Account" onclick="validateForm()"> 
             <input class= "btn" type="button" name="" value="Back" onclick="gotoLogin()">
             </form>
-            <div class="error_msg">Error: Try Again</div>
+            <div style="visibility: hidden" class="error_msg">Error: Try Again</div>
         </div>
     <script type="text/javascript" data-no_users="{{no_users}}" data-valid_info="{{valid_info}}" src="{% static '/scripts/index.js' %}">
     </script>

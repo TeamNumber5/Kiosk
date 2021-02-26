@@ -178,3 +178,7 @@ body {
     text-align: center;
 }
 
+.logout {
+    border: 2px solid black;
+}
+

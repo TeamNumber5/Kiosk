@@ -38,15 +38,20 @@ def index(request):
             users = Active_Employee.objects.all()
             for user in users:
                 user.delete()
-            
-            del request.session['session_key']
-            auth.delete()
-            auth = False
+            try:
+                del request.session['session_key']
+                auth.delete()
+                auth = False
+            except:
+                pass
 
         if 'logout_click' in request.POST:
-            del request.session['session_key']
-            auth.delete()
-            auth = False
+            try:
+                del request.session['session_key']
+                auth.delete()
+                auth = False
+            except:
+                pass
 
 
 

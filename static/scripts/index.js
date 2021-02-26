@@ -103,10 +103,10 @@ function validateForm()
 
 
 function init(no_users, valid_info){
-    if (valid_info == 0 ){
+    if (no_users == 1){
         gotoCreateAccount();
     }
-    else if (no_users == 1){
+    else if (valid_info == 0){
         gotoCreateAccount();
     }
     else{

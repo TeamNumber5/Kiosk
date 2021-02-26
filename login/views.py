@@ -38,10 +38,6 @@ def index(request):
             print ('role '.ljust(15, ' ') + str(item.role),  file=user)
     context = { 'no_users' : 0, 'valid_info' : 1, 'invalid_login' : 'none' }
 
-
-    if len(users) == 0:
-        context['no_users']= 1
-
     if request.method == 'POST':
         # on create account  click, create the account if the user is not found
         if 'create_click' in request.POST:     
@@ -50,20 +46,15 @@ def index(request):
                 first_name =str(form['first_name'].value())
                 last_name = str(form['last_name'].value())
                 user_password= str(form['user_password'].value())
-                
-                employee_id = int(form['employee_id'].value())
-
-                
+                employee_id = int(form['employee_id'].value())                
                 role = str(form['role'].value())
             except:
                 context['valid_info'] = 0
-                return render(request, 'index.html', context)
 
             # Checks if user ID is already taken
             for user in users:
                 if employee_id == int(user.employee_id):
                     context['valid_info'] = 0
-                    return render(request, 'index.html', context)
 
             if validate_create_user(first_name, last_name, employee_id, user_password, role):
                 employee = Employee.objects.create(first_name=first_name,last_name=last_name, employee_id=employee_id, password=user_password, role=role)
@@ -73,7 +64,6 @@ def index(request):
 
             else:
                 context['valid_info'] = 0
-                return render(request, 'index.html', context)
 
 
 
@@ -115,5 +105,9 @@ def index(request):
                 return HttpResponseRedirect('/menu/')
             else:
                 context['invalid_login'] = ''
+
+    users = Employee.objects.all()
+    if len(users) == 0:
+        context['no_users']= 1
 
     return render(request, 'index.html', context) 

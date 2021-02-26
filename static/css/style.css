@@ -89,3 +89,20 @@ body{
     margin-right: 20%;
     padding: 13px 0;
 }
+
+/* Try to fix the centering on this div*/
+.error_msg{
+    
+    font-size: 15px;
+    font-family: serif;
+    visibility: hidden;
+    /*border: 2px solid black;*/
+    width: 79%;
+    height: auto;
+    margin: 0 auto;
+    color: white;
+    padding: 5px;
+    position: relative;
+    text-align: center;
+    margin-bottom: 5px;
+}

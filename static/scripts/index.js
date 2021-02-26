@@ -2,6 +2,11 @@ function gotoCreateAccount()
 {
     document.getElementById("login").style.visibility = "hidden";
     document.getElementById("createUser").style.visibility = "visible";
+
+    document.getElementById("id_error").style.display = "none";
+    document.getElementById("password_error").style.display = "none";
+    document.getElementById("login_error").style.display = "none";
+    document.getElementById("login_error").style.visibility = "hidden";
 }
 
 function gotoLogin()
@@ -46,17 +51,26 @@ function validateLogin()
 {
     let id = document.getElementById("employee_id").value;
     let password = document.getElementById("user_password").value;
+
+    document.getElementById("id_error").style.display = "none";
+    document.getElementById("password_error").style.display = "none";
 	// if isNumeric returns true, proceed with POST request, otherwise, display error message
     if (!isNumeric(id)){
         if (password == ""){
-            alert('Username and Password invalid. Username must be digits, and password cannot be blank.');
+            document.getElementById("id_error").style.display = "";
+            document.getElementById("password_error").style.display = "";
+            document.getElementById("password_error").style.visibility = "visible";
+            document.getElementById("id_error").style.visibility = "visible";
         }
         else{
-            alert('Username invalid. Must be digits.');
+            document.getElementById("id_error").style.display = "";
+            document.getElementById("id_error").style.visibility = "visible";
         }
     }
     else if (password == ""){
-        alert('Password must not be blank.');
+        document.getElementById("password_error").style.display = "";
+        document.getElementById("password_error").style.visibility = "visible"
+
     }
     else{
         payload = {employee_id : id, user_password : password};
@@ -89,7 +103,6 @@ function validateForm()
 
 
 function init(no_users, valid_info){
-
     if (no_users == 1){
         gotoCreateAccount();
     }
@@ -99,7 +112,6 @@ function init(no_users, valid_info){
     else{
         gotoLogin();
     }
-
 }
 
 

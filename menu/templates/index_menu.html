@@ -1,28 +1,28 @@
 <!DOCTYPE HTML>
 <html>
+    {% load static %}
     <head>
         <title>Menu</title>
+        <link rel="shortcut icon" type="image/png" href="{% static '/img/menu_icon_w.png' %}">
     </head>
-	{% load static %}
+	
 	<link rel="stylesheet" href="{% static '/css/menu.css' %}">
     <script type="text/javascript" src="{% static 'scripts/index_menu.js' %}" defer></script>
     <body>
         <nav>
         <div class="info">
             <div class="account">
-                <button id="acc_btn">Account</button>
+                <a>{{role}}</a>
+                <button id="acc_btn"><a>{{first_name}} {{last_name}}</a></button>
                 <ul>
-                    
-                    <li><a>{{first_name}} {{last_name}}</a></li>
-                    <li><a>{{employee_id}}</a></li>
-                    <li><a>{{role}}</a></li>
-                    <li><button type="submit" name="logout_click" onclick="logout_click();">Logout</button></li>
+                    <li><a>ID: {{employee_id}}</a></li>
                 </ul>
             </div>
+            <button type="submit" name="logout_click" onclick="logout_click();"><i class="fa fa-sign-out" aria-hidden="true"></i></button>
         </div>
         </nav>
     
-        <h1 id="tmp">MENU</h1>
+       
         <form method="POST">
         <input id="clearUsersInDatabase" type="submit" name='clear_db' value="Clear Users">
         </form>

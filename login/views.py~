@@ -43,10 +43,6 @@ def index(request):
         if 'create_click' in request.POST:     
             form = CreateUser(request.POST)
             employee_id = 0
-            first_name = ""
-            last_name = ""
-            role = ""
-            user_password = ""
             try:
                 first_name =str(form['first_name'].value())
                 last_name = str(form['last_name'].value())

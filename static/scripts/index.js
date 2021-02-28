@@ -59,11 +59,12 @@ function validateLogin()
         if (password == ""){
             document.getElementById("id_error").style.display = "";
             document.getElementById("password_error").style.display = "";
-            document.getElementById("id_error").style.visibility = "visible"
+            document.getElementById("password_error").style.visibility = "visible";
+            document.getElementById("id_error").style.visibility = "visible";
         }
         else{
             document.getElementById("id_error").style.display = "";
-            document.getElementById("id_error").style.visibility = "visible"
+            document.getElementById("id_error").style.visibility = "visible";
         }
     }
     else if (password == ""){
@@ -102,10 +103,10 @@ function validateForm()
 
 
 function init(no_users, valid_info){
-    if (valid_info == 0 ){
+    if (no_users == 1){
         gotoCreateAccount();
     }
-    else if (no_users == 1){
+    else if (valid_info == 0){
         gotoCreateAccount();
     }
     else{

@@ -42,10 +42,10 @@ function displayError() {
 }
 
 function logout_click(){
+    console.log("INNIT");
     params = {};
     post(params, 'logout_click');
 
 }
-
 
 

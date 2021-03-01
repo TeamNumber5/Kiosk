@@ -80,19 +80,19 @@ function validateLogin()
 
 function validateCreateAccount()
 {
-	let id = document.getElementById("employee_id").value;
-	let password = document.getElementById("user_password").value;
-	let firstName = document.getElementById("first_name").value;
-	let lastName = document.getElementById("last_name").value;
-	let role = document.getElementById("role").value;
-
+	let id = document.getElementById("cemployee_id").value;
+	let password = document.getElementById("cuser_password").value;
+	let firstName = document.getElementById("cfirst_name").value;
+	let lastName = document.getElementById("clast_name").value;
+	let role = document.getElementById("crole").value;
 	document.getElementById("uid_error").style.display = "none";
 	document.getElementById("role_error").style.display = "none";
 	if(!isNumeric(id))
 	{
-			//console.log(document.getElementById("employee_id").value);
+			if(document.getElementById("ceomployee_id").innerHTML.length != 5){
 			document.getElementById("uid_error").style.display = "";
 			document.getElementById("uid_error").style.visibility = "visible";
+			}
 	}
 	else if(!(role == "GM" || role == "CS" || role == "SM"))
 	{
@@ -100,7 +100,6 @@ function validateCreateAccount()
 			document.getElementById("role_error").style.visibility = "visibile";
 	}
 	else{
-		console.log("payload");
 		payload = {employee_id : id, user_password : password, first_name : firstName, last_name : lastName, role : role};
 		post(payload, 'create_click');
 	}

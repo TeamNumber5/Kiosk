@@ -40,6 +40,7 @@
             <div class="textbox">
                 <i class="fa fa-id-card-o" aria-hidden="true"></i>
                 <input type="text" placeholder="Employee ID" id="cemployee_id" name="cemployee_id" value="" required>
+                <input type="text" placeholder="Employee ID" id="cemployee_id"  name="employee_id" value="" required>
             </div>
             <div id="uid_error" style="display: none" class="error_msg">Error: Employee ID must be 5 digits and not blank</div>
             <div id="cid_error" style="display: none" class="error_msg">Error: Employee ID must be 5 digits</div>
@@ -54,6 +55,7 @@
             </div>
             <div id="cpassword_error" style="display: none" class="error_msg">Error: Password cannot be blank</div>
             <input class= "btn" type="submit" name="create_click" value="Create Account" onclick="validateCreateAccount()"> 
+            <input class= "btn" type="button" name="create_click" value="Create Account" onclick="validateCreateAccount()"> 
             <input class= "btn" type="button" name="" value="Back" onclick="gotoLogin()">
             <div style="display: none" class="error_msg">Error: Try Again</div>
         </div>

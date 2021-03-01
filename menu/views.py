@@ -8,7 +8,7 @@ from Kiosk.models import Active_Employee
 # Create your views here.
 
 
-def authAndFetch(request,auto,employee_info):
+def authAndFetch(request,employee_info):
     auth = False
     try:
         session_key = request.session.get('session_key')
@@ -22,21 +22,16 @@ def authAndFetch(request,auto,employee_info):
                 employee_info = {'first_name' : first_name, 'last_name' : last_name, 'employee_id' : employee_id, 'role' : role}
     except:
         pass
+    return auth
 
 def index(request):
     auth = False
-    try:
-        session_key = request.session.get('session_key')
-        if session_key:
-                auth = Active_Employee.objects.filter(session_key=request.session['session_key']).first()
-                employee = Employee.objects.filter(employee_id=auth.employee_id).first()
-                first_name = employee.first_name
-                last_name = employee.last_name
-                employee_id = employee.employee_id
-                role = employee.role
-                employee_info = {'first_name' : first_name, 'last_name' : last_name, 'employee_id' : employee_id, 'role' : role}
-    except:
-        pass
+    employee_info = {}
+    auth = authAndFetch(request,employee_info)
+    """
+    authAndFetch returns true or false and subsequently fills in employee information for
+    the current active session user / active employee
+    """
     if request.method == 'POST':
 
 
@@ -72,9 +67,12 @@ def index(request):
         return HttpResponseRedirect('/login')
 
 def productListing(request):
+    """
+    Same functionality as in index(request)
+    """
     auth = False
     employee_info = {}
-    authAndFetch(request,auth,employee_info)
+    auth = authAndFetch(request,employee_info)
     if auth:
         return render(request, 'productListing.html')
     else:

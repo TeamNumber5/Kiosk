@@ -11,22 +11,7 @@ import string
 from .forms import SubmitLogin
 from .forms import CreateUser
 
-def validate_create_user(first_name, last_name,employee_id, user_password, role):
-    valid = True
-
-    if not first_name.isalpha() or first_name == '' or not last_name.isalpha() or last_name == '':
-        valid = False
-    if len(str(employee_id)) != 5:
-        valid = False
-    if user_password == "":
-        valid = False
-    if role != 'GM' and role != 'SM' and role != 'CS':
-        valid = False
-    return valid
-
-
-def index(request):
-    # Request is type post
+def create_usertxt():
     with open('users.txt', 'w') as user:
         users = Employee.objects.all()
         for item in users:
@@ -36,40 +21,79 @@ def index(request):
             print ('employee_id '.ljust(15, ' ') + str(item.employee_id),file=user)
             print ('password '.ljust(15, ' ') + str(item.password), file=user)
             print ('role '.ljust(15, ' ') + str(item.role),  file=user)
+
+
+def unique_id(employee_id):
+    is_unique = True
+    users = Employee.objects.all()
+    # Checks if user ID is already taken
+    for user in users:
+        if employee_id == int(user.employee_id):
+            is_unique = False
+
+    return is_unique
+
+
+def validate_create_user(first_name, last_name,employee_id, user_password, role):
+    valid = True
+
+    if not first_name.isalpha() or first_name == '' or not last_name.isalpha() or last_name == '':
+        valid = False
+    if len(str(employee_id)) != 5 or not unique_id(employee_id):
+        valid = False
+    if user_password == "":
+        valid = False
+    if role != 'GM' and role != 'SM' and role != 'CS':
+        valid = False
+    return valid
+
+
+def create_user(first_name, last_name, employee_id, user_password, role):
+        employee = Employee.objects.create(first_name=first_name,last_name=last_name, employee_id=employee_id, password=user_password, role=role)
+        if role == 'GM' or role == 'SM':
+            employee.manager = employee_id
+        employee.save()
+
+
+
+
+
+def attempt_create_user(form, context): 
+    employee_id = 0
+    first_name = ""
+    last_name = ""
+    role = ""
+    user_password = ""
+    try:
+        first_name =str(form['first_name'].value())
+        last_name = str(form['last_name'].value())
+        user_password= str(form['user_password'].value())
+        employee_id = int(form['employee_id'].value())                
+        role = str(form['role'].value())
+    except:
+        context['valid_info'] = 0
+
+
+    if validate_create_user(first_name, last_name, employee_id, user_password, role):
+        create_user(first_name, last_name, employee_id, user_password, role)
+    else:
+        context['valid_info'] = 0
+
+
+
+
+def index(request):
+
+    create_usertxt()
+    # Request is type post
     context = { 'no_users' : 0, 'valid_info' : 1, 'invalid_login' : 'none' }
 
     if request.method == 'POST':
         # on create account  click, create the account if the user is not found
         if 'create_click' in request.POST:     
             form = CreateUser(request.POST)
-            employee_id = 0
-            first_name = ""
-            last_name = ""
-            role = ""
-            user_password = ""
-            try:
-                first_name =str(form['first_name'].value())
-                last_name = str(form['last_name'].value())
-                user_password= str(form['user_password'].value())
-                employee_id = int(form['employee_id'].value())                
-                role = str(form['role'].value())
-            except:
-                context['valid_info'] = 0
-
-            # Checks if user ID is already taken
-            for user in users:
-                if employee_id == int(user.employee_id):
-                    context['valid_info'] = 0
-
-            if validate_create_user(first_name, last_name, employee_id, user_password, role):
-                employee = Employee.objects.create(first_name=first_name,last_name=last_name, employee_id=employee_id, password=user_password, role=role)
-                if role == 'GM' or role == 'SM':
-                    employee.manager = employee_id
-                employee.save()
-
-            else:
-                context['valid_info'] = 0
-
+            attempt_create_user(form,context)
+            print("here")
 
 
         if 'login_click' in request.POST:

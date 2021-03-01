@@ -22,13 +22,21 @@ def authAndFetch(request,auto,employee_info):
                 employee_info = {'first_name' : first_name, 'last_name' : last_name, 'employee_id' : employee_id, 'role' : role}
     except:
         pass
-    
 
 def index(request):
     auth = False
-    employee_info = {}
-    authAndFetch(request,auth, employee_info)
-
+    try:
+        session_key = request.session.get('session_key')
+        if session_key:
+                auth = Active_Employee.objects.filter(session_key=request.session['session_key']).first()
+                employee = Employee.objects.filter(employee_id=auth.employee_id).first()
+                first_name = employee.first_name
+                last_name = employee.last_name
+                employee_id = employee.employee_id
+                role = employee.role
+                employee_info = {'first_name' : first_name, 'last_name' : last_name, 'employee_id' : employee_id, 'role' : role}
+    except:
+        pass
     if request.method == 'POST':
 
 

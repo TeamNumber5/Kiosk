@@ -12,10 +12,6 @@ import string
 from .forms import SubmitLogin
 from .forms import CreateUser
 
-
-
-
-
 def index(request):
 
     h.create_usertxt()

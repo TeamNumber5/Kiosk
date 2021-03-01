@@ -21,22 +21,10 @@ def create_usertxt():
             print ('password '.ljust(15, ' ') + str(item.password), file=user)
             print ('role '.ljust(15, ' ') + str(item.role),  file=user)
 
-"""
-Returns true if the employee id is unique
-false otherwise
-"""
-def unique_id(employee_id):
-    is_unique = True
-    users = Employee.objects.all()
-    # Checks if user ID is already taken
-    for user in users:
-        if employee_id == int(user.employee_id):
-            is_unique = False
 
-    return is_unique
 
 """
-
+Validates the users fields
 """
 def validate_create_user(first_name, last_name,employee_id, user_password, role):
     valid = True
@@ -52,16 +40,23 @@ def validate_create_user(first_name, last_name,employee_id, user_password, role)
     return valid
 
 
-def create_user(first_name, last_name, employee_id, user_password, role):
-        employee = Employee.objects.create(first_name=first_name,last_name=last_name, employee_id=employee_id, password=user_password, role=role)
-        if role == 'GM' or role == 'SM':
-            employee.manager = employee_id
-        employee.save()
+"""
+Returns true if the employee id is unique
+false otherwise
+"""
+def unique_id(employee_id):
+    is_unique = True
+    users = Employee.objects.all()
+    # Checks if user ID is already taken
+    for user in users:
+        if employee_id == int(user.employee_id):
+            is_unique = False
 
+    return is_unique
 
-
-
-
+"""
+Attempts validation of user fields
+"""
 def attempt_create_user(form, context): 
     employee_id = 0
     first_name = ""
@@ -83,14 +78,43 @@ def attempt_create_user(form, context):
     else:
         context['valid_info'] = 0
 
+"""
+Creates the user and adds to the employee table
+"""
+def create_user(first_name, last_name, employee_id, user_password, role):
+        employee = Employee.objects.create(first_name=first_name,last_name=last_name, employee_id=employee_id, password=user_password, role=role)
+        if role == 'GM' or role == 'SM':
+            employee.manager = employee_id
+        employee.save()
+
+
+
+"""
+Returns user if a user is found with the employeeid
+and password
+"""
 def get_user(employee_id, user_password):
     return(Employee.objects.filter(employee_id=employee_id,  password=user_password).first())
 
+def create_session_key():
+    unique = False
+    users = Active_Employee.objects.all()
+    while(not unique):
+        session_key = ''.join(random.choice(string.ascii_lowercase) for i in range(10))
+        for user in users:
+            if user.session_key == session_key:
+                break;
+        else:
+            unique = True
+    return session_key
 
 
+"""
+Attempts to login
+"""
 def attempt_login(request,user,context):
     if user:
-        session_key = ''.join(random.choice(string.ascii_lowercase) for i in range(10))
+        session_key = create_session_key()
         name = user.first_name
         employee_id = user.employee_id
         role = user.role
@@ -107,20 +131,23 @@ def attempt_login(request,user,context):
         active_employee.save()
 
         request.session['session_key'] = session_key
-        print(request.session['session_key'])
         # If so direct them to the menu
         return True
     else:
         context['invalid_login'] = ''
         return False
-
+"""
+Removes a user from the database
+"""
 
 def remove_user(user):
     try:
         user.delete()
     except:
         pass
-
+"""
+Checks if the database is empty
+"""
 def empty_db(context):
     users = Employee.objects.all()
     if len(users) == 0:

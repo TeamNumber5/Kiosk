@@ -5,10 +5,14 @@ from .forms import ResetDB
 from .forms import logout
 from Kiosk.models import Employee
 from Kiosk.models import Active_Employee
+import time
 # Create your views here.
 
 def index(request):
     auth = False
+    # The Django session engine is really slow so this gives it a quarter of a second
+    # to get the load the session key
+    time.sleep(.25)
     try:
         session_key = request.session.get('session_key')
         if session_key:    
@@ -48,6 +52,7 @@ def index(request):
         if 'logout_click' in request.POST:
             try:
                 del request.session['session_key']
+                employee.active = False
                 auth.delete()
                 auth = False
             except:

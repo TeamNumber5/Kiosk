@@ -16,6 +16,7 @@ def index(request):
     for i in range(0,100):
         try:
             session_key = request.session.get('session_key')
+            print("session key: {}".format(session_key))
         except:
             print("No Key") 
             pass

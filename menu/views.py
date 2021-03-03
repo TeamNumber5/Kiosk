@@ -68,7 +68,7 @@ def index(request):
             for user in users:
                 user.delete()
 
-            lougout(request,auth,employee)
+            logout(request,auth,employee)
             auth = False
 
 

@@ -12,21 +12,16 @@ def index(request):
     auth = False
     # The Django session engine is really slow so this gives it a quarter of a second
     # to get the load the session key
-    session_key = None
-    for i in range(0,100):
-        try:
-            session_key = request.session.get('session_key')
-            print("session key: {}".format(session_key))
-        except:
-            print("No Key") 
-            pass
-        if session_key != None:
-            break
-    
+    try:
+        session_key = request.session.get('session_key')
+    except:
+        pass
+
     try:
         if session_key:    
-            print("session key: {}".format(session_key))
+            print("query session key: {}".format(session_key))
             auth = Active_Employee.objects.filter(session_key=request.session['session_key']).first()
+            print("auth: {}".format(auth))
             employee = Employee.objects.filter(employee_id=auth.employee_id).first()
             first_name = employee.first_name
             last_name = employee.last_name

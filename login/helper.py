@@ -132,6 +132,7 @@ def attempt_login(request,user,context):
 
         request.session['session_key'] = session_key
         # If so direct them to the menu
+        user.active = True
         return True
     else:
         context['invalid_login'] = ''

@@ -93,7 +93,7 @@ body {
     margin: 30px;
     width: 800px;
     height: 400px;
-    cursor: pointer;
+/*    cursor: pointer;*/
 }
 
 /*CSS FOR WHEN MANAGER IS LOGGED IN*/
@@ -134,7 +134,7 @@ body {
 .manager_buttons {
     display: inline-block;
     position: relative;
-    cursor: pointer;
+/*    cursor: pointer;*/
 }
 
 /*CSS FOR WHEN MANAGER IS LOGGED IN*/
@@ -166,6 +166,7 @@ body {
     height: 200px;
     font-size: 25px;
     border-radius: 25px;
+    cursor: auto;
 }
 
 #clearUsersInDatabase {

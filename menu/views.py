@@ -17,6 +17,7 @@ def index(request):
         try:
             session_key = request.session.get('session_key')
         except:
+            print("No Key") 
             pass
         if session_key != "":
             break

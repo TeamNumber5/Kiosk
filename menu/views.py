@@ -12,7 +12,7 @@ def index(request):
     auth = False
     # The Django session engine is really slow so this gives it a quarter of a second
     # to get the load the session key
-    session_key = ""
+    session_key = None
     for i in range(0,100):
         try:
             session_key = request.session.get('session_key')
@@ -20,7 +20,7 @@ def index(request):
         except:
             print("No Key") 
             pass
-        if session_key != "":
+        if session_key != None:
             break
     
     try:

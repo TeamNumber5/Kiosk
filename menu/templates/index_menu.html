@@ -8,6 +8,7 @@
 	
 	<link rel="stylesheet" href="{% static '/css/menu.css' %}">
     <script type="text/javascript" src="{% static 'scripts/index_menu.js' %}" defer></script>
+    <script type="text/javascript" src="{% static 'scripts/master.js' %}" defer></script>
     <body>
         <nav>
         <div class="info">
@@ -18,14 +19,14 @@
                     <li><a>ID: {{employee_id}}</a></li>
                 </ul>
             </div>
-            <button type="submit" name="logout_click" onclick="logout_click();"><i class="fa fa-sign-out" aria-hidden="true"></i></button>
+            <button id="logout_button" type="submit" name="logout_click" ><i class="fa fa-sign-out" aria-hidden="true"></i></button>
         </div>
         </nav>
     
-       
         <form method="POST">
         <input id="clearUsersInDatabase" type="submit" name='clear_db' value="Clear Users">
         </form>
+
         <div class="container">
             <div class="cashier_buttons">
                 <button class="{{role}}cashier_button" id="startTransaction">Start<br>Transaction</button>

@@ -6,6 +6,8 @@ from .forms import logout
 from Kiosk.models import Employee
 from Kiosk.models import Active_Employee
 import time
+
+
 # Create your views here.
 
 def index(request):
@@ -23,7 +25,7 @@ def index(request):
             employee_id = employee.employee_id
 
             role = employee.role
-            employee_info = {'first_name' : first_name, 'last_name' : last_name, 'employee_id' : employee_id, 'role' : role}
+            index.employee_info = {'first_name' : first_name, 'last_name' : last_name, 'employee_id' : employee_id, 'role' : role}
     except:
         pass
 
@@ -57,19 +59,15 @@ def index(request):
             except:
                 pass
 
-
-
-
-
-
             
     if auth:
-        return render(request, 'index_menu.html', employee_info)
+        return render(request, 'index_menu.html', index.employee_info)
     else:
         return HttpResponseRedirect('/login')
+        
 
 def productListing(request):
-    return render(request, 'productListing.html')
+    return render(request, 'productListing.html', index.employee_info)
 
 def employeeDetail(request):
-    return render(request, 'employeeDetail.html')
+    return render(request, 'employeeDetail.html', index.employee_info)

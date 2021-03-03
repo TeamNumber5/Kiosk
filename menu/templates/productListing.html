@@ -1,10 +1,26 @@
 <!DOCTYPE HTML>
 <html>
+ {% load static %}
     <head>
         <title>Product Listing</title>
     </head>
-	
+    	<link rel="stylesheet" href="{% static '/css/menu.css' %}">
+
+		<script type="text/javascript" src="{% static 'scripts/master.js' %}" defer></script>
+		
     <body>
         <h1 id="tmp">Product Listing</h1>
+        <nav>
+        <div class="info">
+            <div class="account">
+                <a>{{role}}</a>
+                <button id="acc_btn"><a>{{first_name}} {{last_name}}</a></button>
+                <ul>
+                    <li><a>ID: {{employee_id}}</a></li>
+                </ul>
+            </div>
+            <button id="logout_button" type="submit" name="logout_click" ><i class="fa fa-sign-out" aria-hidden="true"></i></button>
+        </div>
+        </nav>
    </body>
 </html>

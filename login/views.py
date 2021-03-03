@@ -47,6 +47,9 @@ def index(request):
                 return HttpResponseRedirect('/menu/')
 
     h.empty_db(context)
-    
+
+    #if no users in the database then redirect to EmployeeDetail page
+    if(context['no_users'] == 1):
+        HttpResponseRedirect('/employeeDetail/')
 
     return render(request, 'index.html', context) 

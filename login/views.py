@@ -44,14 +44,6 @@ def index(request):
             # Query for the login info 
             user = h.get_user(employee_id, user_password)
             if(h.attempt_login(request,user,context)):
-                session_key = ""
-                while True:
-                    try:    
-                        session_key = request.session.get('session_key')
-                    except:
-                        pass
-                    if session_key != "":
-                        break
                 return HttpResponseRedirect('/menu/')
 
     h.empty_db(context)

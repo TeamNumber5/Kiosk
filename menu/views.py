@@ -13,7 +13,7 @@ def index(request):
     # The Django session engine is really slow so this gives it a quarter of a second
     # to get the load the session key
     try:
-        session_key = request.session.get('session_key')
+        session_key = request.session['session_key']
         if session_key:    
             auth = Active_Employee.objects.filter(session_key=session_key).first()
             employee = Employee.objects.filter(employee_id=auth.employee_id).first()

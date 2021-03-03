@@ -129,9 +129,8 @@ def attempt_login(request,user,context):
         
         active_employee = Active_Employee.objects.create(employee_id=employee_id, name=name, role=role, session_key=session_key)
         active_employee.save()
-        print("sent key: {}".format(session_key))
 
-        request.session['sskey'] = session_key
+        request.session['session_key'] = session_key
         # If so direct them to the menu
         user.active = True
         return True

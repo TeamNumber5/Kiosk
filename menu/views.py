@@ -13,15 +13,9 @@ def index(request):
     # The Django session engine is really slow so this gives it a quarter of a second
     # to get the load the session key
     try:
-        session_key = request.session.get('sskey')
-    except:
-        pass
-
-    try:
+        session_key = request.session.get('session_key')
         if session_key:    
-            print("query session key: {}".format(session_key))
             auth = Active_Employee.objects.filter(session_key=session_key).first()
-            print("auth: {}".format(auth))
             employee = Employee.objects.filter(employee_id=auth.employee_id).first()
             first_name = employee.first_name
             last_name = employee.last_name
@@ -56,7 +50,7 @@ def index(request):
 
         if 'logout_click' in request.POST:
             try:
-                del request.session['sskey']
+                del request.session['session_key']
                 employee.active = False
                 auth.delete()
                 auth = False

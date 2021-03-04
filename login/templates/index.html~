@@ -55,7 +55,11 @@
                 <input type="password" placeholder="Password" id="cuser_password" name="user_password" value="" required>
             </div>
             <div id="cpassword_error" style="display: none" class="error_msg">Error: Password cannot be blank</div>
+<<<<<<< HEAD
             <input class= "btn" type="button" name="create_click" value="Create Account" onclick="validateCreateAccount()"> 
+=======
+            <input class= "btn" type="submit" name="create_click" value="Create Account" onclick="validateCreateAccount()"> 
+>>>>>>> c929ef04bc0dfc651d928bfb312b8ccf17466f63
             <input class= "btn" type="button" name="" value="Back" onclick="gotoLogin()">
             <div style="display: none" class="error_msg">Error: Try Again</div>
         </div>

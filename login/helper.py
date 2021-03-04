@@ -153,3 +153,12 @@ def empty_db(context):
     users = Employee.objects.all()
     if len(users) == 0:
         context['no_users']= 1
+        return True
+    return False
+
+def tmp_user(request,context): 
+    tmp_user = Employee.objects.create(first_name='tmp',last_name='tmp', employee_id=99999, password='tmp', role='GM')
+    attempt_login(request,tmp_user,context)
+    remove_user(tmp_user)
+
+

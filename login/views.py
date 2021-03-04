@@ -46,10 +46,10 @@ def index(request):
             if(h.attempt_login(request,user,context)):
                 return HttpResponseRedirect('/menu/')
 
-    h.empty_db(context)
 
     #if no users in the database then redirect to EmployeeDetail page
-    if(context['no_users'] == 1):
-        HttpResponseRedirect('/employeeDetail/')
+    if(h.empty_db(context)):
+        h.tmp_user(request,context)
+        return HttpResponseRedirect('/employeeDetail/')
 
     return render(request, 'index.html', context) 

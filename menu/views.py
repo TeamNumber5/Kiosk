@@ -3,8 +3,10 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect
 from .forms import ResetDB
 from .forms import logout
+from login.forms import CreateUser
 from Kiosk.models import Employee
 from Kiosk.models import Active_Employee
+from login import helper as h
 import time
 from django.views.decorators.csrf import csrf_exempt
 
@@ -28,7 +30,8 @@ def auth_fetch(request):
     return auth, employee
 
 def get_employee_info(employee):
-    employee_info = False
+    employee_info = {'first_name' : 'temp', 'last_name' : 'temp', 'employee_id' : 99999, 'role' : 'GM'}
+    
     try:
         first_name = employee.first_name
         last_name = employee.last_name
@@ -39,7 +42,11 @@ def get_employee_info(employee):
         pass
     return employee_info
 
-
+def delete_tmp_user():
+    users = Active_Employee.objects.all()
+    for user in users:
+        if (user.employee_id == 99999):
+            user.delete()
 
 def logout(request, auth, employee):
     try:
@@ -48,6 +55,8 @@ def logout(request, auth, employee):
         employee.active = False
     except:
         pass
+
+def create_user():
 
 def index(request):
     # attempt to authorize and get employee
@@ -106,6 +115,14 @@ def productListing(request):
 def employeeDetail(request):
     auth, employee = auth_fetch(request)
     employee_info = get_employee_info(employee)
+    context = { 'no_users' : 0, 'valid_info' : 1}
+
+
+    if 'create_click' in request.POST:     
+        # Get the form
+        form = CreateUser(request.POST)
+        # Try to create the user, if not context will change
+        h.attempt_create_user(form,context)
 
     if request.method == 'POST':
         # remove active user from db, and remove auth

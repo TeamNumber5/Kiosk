@@ -32,11 +32,13 @@
                 <input type="text" placeholder="Firstname" id="cfirst_name" value="" required>
             </div>    
             <div id="fname_error" style="display: none" class="error_msg">Error: First name cannot be blank</div>
+			<div id ="fname_alpha" style="display: none" class="error_msg">Error: First name must only contain alphabetical letters</div>
             <div class="textbox">
                 <i class="fa fa-tags" aria-hidden="true"></i>
                 <input type="text" placeholder="Lastname" id="clast_name" name="last_name" value="" required>
             </div>     
             <div id="lname_error" style="display: none" class="error_msg">Error: Last name cannot be blank</div>
+			<div id="lname_alpha" style="display: none" class="error_msg">Error: Last name must only contain alphabetical letters</div>
             <div class="textbox">
                 <i class="fa fa-id-card-o" aria-hidden="true"></i>
                 <input type="text" placeholder="Employee ID" id="cemployee_id"  name="employee_id" value="" required>
@@ -47,13 +49,12 @@
                 <i class="fa fa-street-view" aria-hidden="true"></i>
                 <input type="text" placeholder="Role" id="crole" name="role" value="" required>
             </div> 
-            <div id="role_error" style="display: none" class="error_msg">Error: Role must be "GM SM or CS"</div>
+            <div id="crole_error" style="display: none" class="error_msg">Error: Role must be GM SM or CS</div>
             <div class="textbox">
                 <i class="fa fa-key" aria-hidden="true"></i>
                 <input type="password" placeholder="Password" id="cuser_password" name="user_password" value="" required>
             </div>
             <div id="cpassword_error" style="display: none" class="error_msg">Error: Password cannot be blank</div>
-            <input class= "btn" type="submit" name="create_click" value="Create Account" onclick="validateCreateAccount()"> 
             <input class= "btn" type="button" name="create_click" value="Create Account" onclick="validateCreateAccount()"> 
             <input class= "btn" type="button" name="" value="Back" onclick="gotoLogin()">
             <div style="display: none" class="error_msg">Error: Try Again</div>

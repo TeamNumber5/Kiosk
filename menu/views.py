@@ -32,7 +32,7 @@ def index(request):
     authAndFetch returns true or false and subsequently fills in employee information for
     the current active session user / active employee
     """
-    if request.method == 'POST':
+    if request.method == 'POST' and auth:
 
 
         if 'clear_db' in request.POST:

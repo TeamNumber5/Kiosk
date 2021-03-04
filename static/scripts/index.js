@@ -76,6 +76,11 @@ function isNumeric(value)
 	return /^\d+$/.test(value);
 }
 
+function isOnlyAlphabetical(value)
+{
+	return /[^a-z]/i.test(value);
+}
+
 
 function validateLogin()
 {
@@ -99,7 +104,7 @@ function validateLogin()
     }
     else if (password == ""){
         document.getElementById("password_error").style.display = "";
-        document.getElementById("password_error").style.visibility = "visible"
+        document.getElementById("password_error").style.visibility = "visible";
 
     }
     else{
@@ -110,27 +115,54 @@ function validateLogin()
 
 function validateCreateAccount()
 {
-	let id = document.getElementById("cemployee_id").value;
-	let password = document.getElementById("cuser_password").value;
 	let firstName = document.getElementById("cfirst_name").value;
 	let lastName = document.getElementById("clast_name").value;
+	let id = document.getElementById("cemployee_id").value;
 	let role = document.getElementById("crole").value;
+	let password = document.getElementById("cuser_password").value;
 
+	document.getElementById("fname_error").style.display = "none";
+	document.getElementById("fname_alpha").style.display = "none";
+	document.getElementById("lname_alpha").style.display = "none";
+	document.getElementById("lname_error").style.display = "none";
 	document.getElementById("uid_error").style.display = "none";
-	document.getElementById("role_error").style.display = "none";
-	if(!isNumeric(id))
-	{
-			//console.log(document.getElementById("employee_id").value);
-			document.getElementById("uid_error").style.display = "";
-			document.getElementById("uid_error").style.visibility = "visible";
+	document.getElementById("cid_error").style.display = "none";
+	document.getElementById("crole_error").style.display = "none";
+	document.getElementById("cpassword_error").style.display = "none";
+
+	if(firstName === ""){
+		document.getElementById("fname_error").style.display = "";
+		document.getElementById("fname_error").style.visibility = "visible";
 	}
-	else if(!(role == "GM" || role == "CS" || role == "SM"))
-	{
-			document.getElementById("role_error").style.display = "";
-			document.getElementById("role_error").style.visibility = "visibile";
+	else if(isOnlyAlphabetical(firstName)){
+			document.getElementById("fname_alpha").style.display = "";
+			document.getElementById("fname_alpha").style.visibility = "visible";
+	}
+	else if (lastName === ""){
+		document.getElementById("lname_error").style.display = "";
+		document.getElementById("lname_error").style.visibility = "visible";
+	}
+	else if(isOnlyAlphabetical(lastName)){
+		document.getElementById("lname_alpha").style.display = "";
+		document.getElementById("lname_alpha").style.visibility = "visible";
+	}
+	else if(!isNumeric(id)){
+		document.getElementById("uid_error").style.display = "";
+		document.getElementById("uid_error").style.visibility = "visible";
+	}
+	else if(!(id.length ==5)){
+		document.getElementById("cid_error").style.display = "";
+		document.getElementById("cid_error").style.visibility = "visible";
+	}		
+	else if(!(role === "GM" || role === "CS" || role === "SM")){
+			document.getElementById("crole_error").style.display = "";
+			document.getElementById("crole_error").style.visibility = "visible";
+	}
+	else if(password === ""){
+			document.getElementById("cpassword_error").style.display = "";
+			document.getElementById("cpassword_error").style.visibility = "visible";
 	}
 	else{
-		console.log("payload");
 		payload = {employee_id : id, user_password : password, first_name : firstName, last_name : lastName, role : role};
 		post(payload, 'create_click');
 	}

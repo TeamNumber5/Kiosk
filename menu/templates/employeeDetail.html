@@ -4,12 +4,11 @@
     <head>
         <title>Employee Detail</title>
     </head>
-    	<link rel="stylesheet" href="{% static '/css/menu.css' %}">
+    	<link rel="stylesheet" href="{% static '/css/employee_detail.css' %}">
 
     	<script type="text/javascript" src="{% static 'scripts/master.js' %}" defer></script>
   
     <body>
-        <h1 id="tmp">Employee Detail</h1>
         <nav>
         <div class="info">
             <div class="account">
@@ -22,5 +21,47 @@
             <button id="logout_button" type="submit" name="logout_click" ><i class="fa fa-sign-out" aria-hidden="true"></i></button>
         </div>
         </nav>
+        
+        <div id="createUser" class="create-user">
+            <h1>Create User</h1>
+                
+            <div class="textbox">
+                 <i class="fa fa-tag" aria-hidden="true"></i>
+                <input type="text" placeholder="Firstname" id="cfirst_name" value="" required>
+            </div>    
+            <div id="fname_error" style="display: none" class="error_msg">Error: First name cannot be blank</div>
+                
+            <div class="textbox">
+                <i class="fa fa-tags" aria-hidden="true"></i>
+                <input type="text" placeholder="Lastname" id="clast_name" name="last_name" value="" required>
+            </div>     
+            <div id="lname_error" style="display: none" class="error_msg">Error: Last name cannot be blank</div>
+
+            <div class="textbox">
+                <i class="fa fa-id-card-o" aria-hidden="true"></i>
+                <input type="text" placeholder="Employee ID" id="cemployee_id"  name="employee_id" value="" required>
+            </div>
+            <div id="uid_error" style="display: none" class="error_msg">Error: Employee ID is not unique</div>
+            <div id="cid_error" style="display: none" class="error_msg">Error: Employee ID must be 5 digits</div>
+                
+            <div class="textbox">
+                <i class="fa fa-street-view" aria-hidden="true"></i>
+                <input type="text" placeholder="Role" id="crole" name="role" value="" required>
+            </div> 
+            <div id="role_error" style="display: none" class="error_msg">Error: Role must be "GM SM or CS"</div>
+            
+            <div class="textbox">
+                <i class="fa fa-key" aria-hidden="true"></i>
+                <input type="password" placeholder="Password" id="cuser_password" name="user_password" value="" required>
+            </div>
+            <div id="cpassword_error" style="display: none" class="error_msg">Error: Password cannot be blank</div>
+
+
+            <input class= "btn" type="button" name="create_click" value="Create Account" onclick="validateCreateAccount()"> 
+            <input class= "btn" type="button" name="" value="Back">
+            <div style="display: none" class="error_msg">Error: Try Again</div> 
+        </div>
+        
+        
    </body>
 </html>

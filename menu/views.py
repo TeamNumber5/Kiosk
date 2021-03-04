@@ -57,6 +57,7 @@ def logout(request, auth, employee):
         pass
 
 def create_user():
+    pass
 
 def index(request):
     # attempt to authorize and get employee

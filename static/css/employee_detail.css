@@ -167,8 +167,8 @@ body{
     
     font-size: 15px;
     font-family: serif;
-    visibility: hidden;
     /*border: 2px solid black;*/
+    visibility: hidden;
     width: 79%;
     height: auto;
     margin: 0 auto;

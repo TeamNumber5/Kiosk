@@ -29,6 +29,23 @@ def auth_fetch(request):
         pass
     return auth, employee
 
+def creds(auth):
+    cred = False
+    try:
+        if auth.role == "GM" or auth.role == "SM":
+            cred = True
+    except:
+        pass
+    return cred
+
+def is_temp(auth):
+    try:
+        if auth.employee_id == 99999:
+            return True
+    except:
+        pass
+    return False
+
 def get_employee_info(employee):
     employee_info = {'first_name' : 'temp', 'last_name' : 'temp', 'employee_id' : 99999, 'role' : 'GM'}
     
@@ -88,7 +105,7 @@ def index(request):
             auth = False
 
             
-    if auth:
+    if auth and not is_temp(auth):
         return render(request, 'index_menu.html', employee_info)
     else:
         return HttpResponseRedirect('/login')
@@ -106,7 +123,7 @@ def productListing(request):
             logout(request,auth,employee)
             auth = False
 
-    if auth:
+    if auth and creds(auth) and not is_temp(auth):
        return render(request, 'productListing.html', employee_info)
     else:
         return HttpResponseRedirect('/login')
@@ -115,15 +132,28 @@ def productListing(request):
 @csrf_exempt
 def employeeDetail(request):
     auth, employee = auth_fetch(request)
-    employee_info = get_employee_info(employee)
-    context = { 'no_users' : 0, 'valid_info' : 1}
+    context = get_employee_info(employee)
+    context['valid_info'] = 1
+
+    try:
+        if 'back' in request.POST and auth.employee_id != 99999:
+            return (HttpResponseRedirect('/menu/'))
+    except:
+        pass
 
 
     if 'create_click' in request.POST:     
         # Get the form
         form = CreateUser(request.POST)
         # Try to create the user, if not context will change
-        h.attempt_create_user(form,context)
+        if (h.empty_db(context)):
+            delete_tmp_user()
+            h.attempt_create_user(form,context)
+            if context['valid_info'] == 1:
+                auth = False
+        else:
+            h.attempt_create_user(form,context)
+
 
     if request.method == 'POST':
         # remove active user from db, and remove auth
@@ -131,8 +161,8 @@ def employeeDetail(request):
             logout(request,auth,employee)
             auth = False
 
-    if auth:
-       return render(request, 'employeeDetail.html', employee_info)
+    if auth and creds(auth):
+        return render(request, 'employeeDetail.html', context)
     else:
         return HttpResponseRedirect('/login')
     

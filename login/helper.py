@@ -145,9 +145,7 @@ def remove_user(user):
 
     try:
         user.delete()
-        print("deleted")
     except:
-        print('nope')
         pass
 """
 Checks if the database is empty

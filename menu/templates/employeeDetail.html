@@ -54,16 +54,20 @@
             </div>
             <div id="cpassword_error" style="display: none" class="error_msg">Error: Password cannot be blank</div>
             <div id='unique' style="display: none" class="error_msg">Error: Id is already taken</div>
+            <div id='man_error' style="display: none" class="error_msg">Error: First user must be a manager</div>
+            <div id='cuser' style="display: none" class="error_msg">Succesfully created user</div>
 
             <input class= "btn" type="button" name="create_click" value="Create Account" onclick="validateCreateAccount()"> 
             <input class= "btn" type="button" name="" value="Back" onclick="back()">
         </div> 
    </body>
    
-        <script type="text/javascript" data-valid_info="{{valid_info}}" src="{% static '/scripts/employeeDetail.js' %}">
+    <script type="text/javascript" data-valid_info="{{valid_info}}" data-no_users="{{no_users}}" data-user_created="{{user_created}}"src="{% static '/scripts/employeeDetail.js' %}">
         </script>
         <script type="text/javascript">
             valid_info = {{valid_info}};
-            init(valid_info);
+            no_users = {{no_users}};
+            user_created = {{user_created}};
+            init(valid_info, no_users, user_created);
         </script>
 </html>

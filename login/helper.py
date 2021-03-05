@@ -63,6 +63,7 @@ def attempt_create_user(form, context):
     last_name = ""
     role = ""
     user_password = ""
+    success = False
     try:
         first_name =str(form['first_name'].value())
         last_name = str(form['last_name'].value())
@@ -75,8 +76,11 @@ def attempt_create_user(form, context):
 
     if validate_create_user(first_name, last_name, employee_id, user_password, role):
         create_user(first_name, last_name, employee_id, user_password, role)
+        success = True
     else:
         context['valid_info'] = 0
+    return success
+
 
 """
 Creates the user and adds to the employee table

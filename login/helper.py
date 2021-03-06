@@ -31,7 +31,7 @@ def validate_create_user(first_name, last_name,employee_id, user_password, role)
 
     if not first_name.isalpha() or first_name == '' or not last_name.isalpha() or last_name == '':
         valid = False
-    if len(str(employee_id)) != 5 or not unique_id(employee_id):
+    if len(employee_id) != 5 or not unique_id(employee_id):
         valid = False
     if user_password == "":
         valid = False
@@ -49,7 +49,7 @@ def unique_id(employee_id):
     users = Employee.objects.all()
     # Checks if user ID is already taken
     for user in users:
-        if employee_id == int(user.employee_id):
+        if employee_id == user.employee_id:
             is_unique = False
 
     return is_unique
@@ -57,7 +57,7 @@ def unique_id(employee_id):
 """
 Attempts validation of user fields
 """
-def attempt_create_user(form, context): 
+def attempt_create_user(form, context):
     employee_id = 0
     first_name = ""
     last_name = ""
@@ -68,7 +68,7 @@ def attempt_create_user(form, context):
         first_name =str(form['first_name'].value())
         last_name = str(form['last_name'].value())
         user_password= str(form['user_password'].value())
-        employee_id = int(form['employee_id'].value())                
+        employee_id = str(form['employee_id'].value())                
         role = str(form['role'].value())
     except:
         context['valid_info'] = 0

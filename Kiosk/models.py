@@ -11,7 +11,7 @@ class Employee(models.Model):
 
     last_name = models.TextField()
 
-    employee_id = models.IntegerField()
+    employee_id = models.CharField(max_length=5)
 
     # States whether the user is active or inactive.
     active = models.BooleanField(default=False)
@@ -37,7 +37,7 @@ class Active_Employee(models.Model):
     # Django auto increment primary key
     record_id = models.AutoField(primary_key=True)
 
-    employee_id = models.IntegerField()
+    employee_id = models.CharField(max_length=5)
 
     name = models.TextField()
 

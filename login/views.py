@@ -35,7 +35,7 @@ def index(request):
             user_password = ""
             # Login info
             try:
-                employee_id =int(str(form['employee_id'].value()))
+                employee_id = str(form['employee_id'].value())
                 user_password= str(form['user_password'].value())
             except:
                 print('Logon error')

@@ -1,8 +1,10 @@
 from django import forms
 
 class SubmitLogin(forms.Form):
-    employee_id = forms.CharField(label='employee_id', max_length=100)
+    employee_id = forms.CharField(label='employee_id', max_length=5)
     user_password = forms.CharField(label='user_password',max_length=100)
+
+
 
 
 

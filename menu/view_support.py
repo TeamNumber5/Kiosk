@@ -37,14 +37,14 @@ def creds(auth):
 
 def is_temp(auth):
     try:
-        if auth.employee_id == 99999:
+        if auth.employee_id == "99999":
             return True
     except:
         pass
     return False
 
 def get_employee_info(employee):
-    employee_info = {'first_name' : 'temp', 'last_name' : 'temp', 'employee_id' : 99999, 'role' : 'GM'}
+    employee_info = {'first_name' : 'temp', 'last_name' : 'temp', 'employee_id' : "99999", 'role' : 'GM'}
     
     try:
         first_name = employee.first_name
@@ -59,7 +59,7 @@ def get_employee_info(employee):
 def delete_tmp_user():
     users = Active_Employee.objects.all()
     for user in users:
-        if (user.employee_id == 99999):
+        if (user.employee_id == "99999"):
             user.delete()
 
 def logout(request, auth, employee):

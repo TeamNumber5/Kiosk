@@ -88,6 +88,7 @@ def employeeDetail(request):
     # Back button that returns to menu, and restricts
     # temporary user from accessing
     if 'back' in request.POST and not support.is_temp(auth):
+        print(auth.employee_id)
         return (HttpResponseRedirect('/menu/'))
 
     # POST to create user

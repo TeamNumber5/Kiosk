@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from .forms import ResetDB, logout
 from login.forms import CreateUser
 from Kiosk.models import Employee, Active_Employee
+from menu.models import Item
 from login import helper as h
 from . import view_support as support
 import time
@@ -65,9 +66,17 @@ def productListing(request):
         if 'logout_click' in request.POST:
             support.logout(request,auth,employee)
             auth = False
+    
 
     if auth and not support.is_temp(auth):
-       return render(request, 'productListing.html', employee_info)
+       '''
+       proof of concept code
+       '''
+       item = Item.objects.filter(item_id ="11111").first()
+       context = support.get_context(employee_info, item)
+       print(context['photo'])
+       
+       return render(request, 'productListing.html', context)
     else:
         return HttpResponseRedirect('/login')
     

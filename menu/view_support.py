@@ -43,6 +43,24 @@ def is_temp(auth):
         pass
     return False
 
+def get_context(employee_info,item):
+    context = {"item_id": 'null', "item_name": 'null', "item_price": "null", "item_description": "null", "photo": "null"}
+    print(item)
+    try:
+        item_id = item.item_id
+        item_name = item.item_name
+        item_price = item.item_price
+        item_description = item.item_description
+        photo = item.photo
+        context = {"item_id": item_id, "item_name": item_name, "item_price": item_price, "item_description": item_description, "photo": photo}
+    except:
+        print("caught")
+        pass
+    context.update(employee_info)
+    return context
+    
+
+
 def get_employee_info(employee):
     employee_info = {'first_name' : 'temp', 'last_name' : 'temp', 'employee_id' : "99999", 'role' : 'GM'}
     

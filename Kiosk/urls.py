@@ -15,7 +15,8 @@ Including another URLconf
 """
 from django.urls import include, path
 from django.shortcuts import redirect
-
+from django.conf import settings
+from django.conf.urls.static import static
 from menu.views import productListing, employeeDetail
 
 urlpatterns = [
@@ -24,5 +25,5 @@ urlpatterns = [
     path('menu/', include('menu.urls')),
     path('productListing/', productListing),
     path('employeeDetail/', employeeDetail),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-]

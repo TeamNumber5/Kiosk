@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+import random
+import string
 from django.http import HttpResponse, HttpResponseRedirect
 from .forms import ResetDB, logout
 from login.forms import CreateUser
@@ -58,6 +60,19 @@ def get_context(employee_info,item):
         pass
     context.update(employee_info)
     return context
+
+def get_new_id():
+    employee_id = ''.join(random.choice(string.digits) for i in range(5))
+    matched = Employee.objects.filter(employee_id=employee_id).first()
+    while matched != None:
+        employee_id = ''.join(random.choice(string.digits) for i in range(5))
+        matched = Employee.objects.filter(employee_id=employee_id).first()
+
+    return employee_id
+
+
+
+    
     
 
 

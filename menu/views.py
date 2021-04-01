@@ -93,6 +93,8 @@ def employeeDetail(request):
     context['no_users'] = 0
     context['valid_info'] = 1
     context['user_created'] = 0
+    context['employee_id'] = support.get_new_id()
+
 
     # Back button that returns to menu, and restricts
     # temporary user from accessing

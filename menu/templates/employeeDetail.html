@@ -45,7 +45,12 @@
             <div id="cid_error" style="display: none" class="error_msg">Error: Employee ID must be 5 digits</div>
             <div class="textbox">
                 <i class="fa fa-street-view" aria-hidden="true"></i>
-                <input type="text" placeholder="Role" id="crole" name="role" value="" required>
+<!--                <input type="text" placeholder="Role" id="crole" name="role" value="" required>-->
+                <select class="role_select" name="role">
+                    <option value="GM">General Manager</option>
+                    <option value="SM">Store Manager</option>
+                    <option value="CS">Cashier</option>
+                </select>
             </div> 
             <div id="crole_error" style="display: none" class="error_msg">Error: Role must be GM SM or CS</div>
             <div class="textbox">

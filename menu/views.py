@@ -50,7 +50,32 @@ def index(request):
         return render(request, 'index_menu.html', employee_info)
     else:
         return HttpResponseRedirect('/login')
+    
+@csrf_exempt
+def productDetail(request):
+    # attempt to authorize and get employee
+    auth, employee = support.auth_fetch(request)
+    # get context for page
+    employee_info = support.get_employee_info(employee)
+
+    if request.method == 'POST':
+
+        # remove active user from db, and remove auth
+        if 'logout_click' in request.POST:
+            support.logout(request,auth,employee)
+            auth = False
+
+
+    if auth and not support.is_temp(auth):
+       '''
+       proof of concept code
+       '''
+       item = Item.objects.filter(item_id ="11111").first()
+       context = support.get_context(employee_info, item)
        
+       return render(request, 'productDetail.html', context)
+    else:
+        return HttpResponseRedirect('/login')
 
 @csrf_exempt
 def productListing(request):

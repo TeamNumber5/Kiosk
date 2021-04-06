@@ -7,9 +7,10 @@
     	<link rel="stylesheet" href="{% static '/css/product_listing.css' %}">
 
 		<script type="text/javascript" src="{% static 'scripts/master.js' %}" defer></script>
+        <script type="text/javascript" src="{% static 'scripts/ProductListing.js' %}" defer></script>
 		
     <body>
-        
+
         <nav>
         <div class="info">
             <div class="search-box">
@@ -28,14 +29,19 @@
             </div>
             <button id="logout_button" type="submit" name="logout_click" ><i class="fa fa-sign-out" aria-hidden="true"></i></button>
         </div>
+        <div >
+            <button id="createNewButton" class="button">Create New</button>
+        </div>
+
         <div>
             <p>{{item_id}}</p>
             <p>{{item_name}}</p>
-            <p>${{item_price}}</p>
+            <p>{{item_price}}</p>
             <p>{{item_description}}</p>
             <img src="../{{photo}}">
 
         </div>
         </nav>
+
    </body>
 </html>

@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html>
+    {% load static %}
+    <head>
+        <title>Menu</title>
+        <link rel="shortcut icon" type="image/png" href="{% static '/img/menu_icon_w.png' %}">
+    </head>
+	
+	<link rel="stylesheet" href="{% static '/css/createProduct.css' %}">
+    <script type="text/javascript" src="{% static 'scripts/createProduct.js' %}" defer></script>
+    <body>
+        <div class="Form-Container">
+            <div class="Form">
+                <p class="Box-Head">Name</p>
+                <input class="Box-Input" type="text" id="name"/>
+                <p class=Box-Head>Description</p>
+                <textarea class="Box-Input desc" type="text" id="desc"></textarea>
+                <p class=Box-Head>Price</p>
+                <input class="Box-Input" type="text" id="price"/>
+                <p class=Box-Head>Quantity Available</p>
+                <input class="Box-Input" type="text" id="qavail"/>
+                <div class="File-Container">
+                    <p for="img" class="Box-Head">Select image: </label>
+                    <input type="file" id="img"  accept=".jpg, .jpeg, .png">
+                </div>
+                <div class="Button-Container">
+                    <button class="button" name="create_product" onclick="validateCreateProduct()">Submit</button>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>

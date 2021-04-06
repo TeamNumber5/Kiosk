@@ -1,0 +1,66 @@
+@import "https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+body {
+    background-color: bisque;
+}
+
+.Form-Container{
+    display: flex;
+    width:100%;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+
+}
+.File-Container{
+    width:90%;
+}
+
+.Form {
+    width: 50%;
+    height:60%;
+    border: 3px grey solid;
+}
+
+.Box-Head{
+    font-size: 1.5rem;
+    padding-left: 1%;
+    padding-top: 3%;
+}
+
+.Box-Input {
+    width: 98%;
+    height: 2.5vh;
+    margin-left: 1%;
+    margin-top: .3rem;
+}
+
+
+.desc {
+    height: 7vh !important;
+}
+
+.button {
+    margin-top: 8%;
+    font-family: Hack, monospace;
+    background: #d3d3d3;
+    color: #2c2c2c;
+    cursor: pointer;
+    font-size: 1em;
+    padding: 1.5rem;
+    border: 0;
+    border-radius: 10px;
+    width: 15%;
+    position: relative;
+    margin-left: 42.5%;
+}
+
+.Button-Container{
+    width: 100%;
+}
+
+

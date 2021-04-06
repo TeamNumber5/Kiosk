@@ -2,10 +2,13 @@ from django.shortcuts import render, redirect
 import os
 import random
 import string
+from PIL import Image
+import PIL
 from django.http import HttpResponse, HttpResponseRedirect
 from .forms import ResetDB, logout
 from login.forms import CreateUser
 from Kiosk.models import Employee, Active_Employee
+from menu.models import Item
 from login import helper as h
 import time
 from django.views.decorators.csrf import csrf_exempt
@@ -71,22 +74,41 @@ def get_new_id():
 
     return employee_id
 
-def create_new_product(form):
-    info = {}
-    img = True
+def create_new_product(form, img):
     try:
-       info['name'] = form['name'].value()
-       info['desc'] = form['desc'].value()
-       info['price'] = float(form['price'].value())
-       info['qavail'] = int(form['qavail'].value())
-       try:
-           info['img'] = form['img'].value()
-       except:
-           img = False
+        img = img['product_img']
     except:
+        img= None
+    item_id = ''.join(random.choice(string.digits) for i in range(5))
+    matched = Item.objects.filter(item_id=item_id).first()
+    while matched != None:
+        item_id = ''.join(random.choice(string.digits) for i in range(5))
+        matched = Item.objects.filter(item_id=item_id).first()
+    print(item_id)
+    info = {}
+    try:
+       name = str(form['product_name'].value())
+       print(name)
+       desc = str(form['product_desc'].value())
+       print(desc)
+       price = float(form['product_price'].value())
+       print(price)
+       qavail = int(form['product_qavail'].value())
+       print(qavail)
+       
+    except:
+        print("failed")
         return False
 
-    if img:
+    if img != None:
+        img = Image.open(img)
+        path = "./static/product_photos/{}.jpg".format(name)
+        img.save(path)
+        item = Item.objects.create(item_id=item_id, item_name=name, item_price=price, item_description=desc, item_available=qavail, photo=path)
+        item.save()
+    else:
+        item = Item.objects.create(item_id=item_id, item_name=name, item_price=price, item_description=desc, item_available=qavail)
+        item.save()
 
 
 

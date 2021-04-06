@@ -5,13 +5,20 @@ function post(params, form_name) {
   const form = document.createElement('form');
   form.method = 'POST';
   form.action = window.location.href;
+  form.enctype= "multipart/form-data";
 
   for (const key in params) {
     if (params.hasOwnProperty(key)) {
       const hiddenField = document.createElement('input');
       hiddenField.type = 'hidden';
       hiddenField.name = key;
+      if (key == "product_img"){
+        hiddenField.type="file";
+        hiddenField.files = params[key];
+      }
+      else{
       hiddenField.value = params[key];
+      }
 
       form.appendChild(hiddenField);
     }
@@ -39,7 +46,7 @@ function validateCreateProduct(){
     let desc = document.getElementById("desc").value;
     let price = document.getElementById("price").value;
     let qavail = document.getElementById("qavail").value;
-    let img = document.getElementById("img").value;
+    let img = document.getElementById("img").files;
     let error = false;
 
     
@@ -59,7 +66,9 @@ function validateCreateProduct(){
         console.log('not int');
         error = true;
     }
-    if (img != null && !error){
+    if (img.length != 0 && !error){
+        console.log(name)
+        console.log(img[0])
         params = {product_name : name, product_desc : desc, product_price : price, product_qavail : qavail, product_img : img};
         post(params, "create_product");
     }

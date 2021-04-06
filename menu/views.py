@@ -72,7 +72,8 @@ def productListing(request):
        '''
        proof of concept code
        '''
-       item = Item.objects.filter(item_id ="11111").first()
+       item = Item.objects.filter(item_id ="78703").first()
+       print(item.photo)
        context = support.get_context(employee_info, item)
        print(context['photo'])
        
@@ -86,7 +87,7 @@ def createProduct(request):
     employee_info = support.get_employee_info(employee)
     if 'create_product' in request.POST:
         form = CreateProduct(request.POST)
-        support.create_new_product(form.org())
+        support.create_new_product(form, request.FILES)
 
         pass
 

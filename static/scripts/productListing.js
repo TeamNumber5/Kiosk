@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () =>  {
 	 document.getElementById("createNewButton").addEventListener('click', () => { params = {}; name='go_create_new'; post(params, name);});
 });
 
+
 function post(params, form_name) {
 
   const form = document.createElement('form');

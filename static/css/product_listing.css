@@ -110,7 +110,7 @@ body {
     cursor: pointer;
 }
 
-.button{
+.createbutton{
     display: inline-block;
     position: relative;
     font-size: 20px;
@@ -119,6 +119,43 @@ body {
     width: 20%;
     height: 50px;
     cursor: pointer;
+    border-radius: 10px;
+}
+
+.GMbutton {
+     display: inline-block;
+    position: relative;
+    font-size: 20px;
+    margin-left: 45%;
+    margin-right: 40%: 
+    width: 20%;
+    height: 50px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.SMbutton {
+   display: inline-block;
+    position: relative;
+    font-size: 20px;
+    margin-left: 45%;
+    margin-right: 40%: 
+    width: 20%;
+    height: 50px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.CSbutton {
+    visibility: hidden;
+    display: inline-block;
+    position: relative;
+    font-size: 20px;
+    margin-left: 45%;
+    margin-right: 40%: 
+    width: 20%;
+    height: 50px;
+    cursor: auto;
     border-radius: 10px;
 }
 

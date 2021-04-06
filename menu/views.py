@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
-from .forms import ResetDB, logout
+from .forms import ResetDB, logout, CreateProduct
 from login.forms import CreateUser
 from Kiosk.models import Employee, Active_Employee
 from menu.models import Item
@@ -79,6 +79,21 @@ def productListing(request):
        return render(request, 'productListing.html', context)
     else:
         return HttpResponseRedirect('/login')
+@csrf_exempt
+def createProduct(request):
+    auth, employee = support.auth_fetch(request)
+    # get context for page
+    employee_info = support.get_employee_info(employee)
+    if 'create_product' in request.POST:
+        form = CreateProduct(request.POST)
+        support.create_new_product(form.org())
+
+        pass
+
+    if auth and not support.is_temp(auth):
+       return render(request, 'createProduct.html', employee_info)
+    else:
+        return HttpResponseRedirect('/menu')
     
 
 @csrf_exempt
@@ -141,6 +156,8 @@ def employeeDetail(request):
     
     if auth and support.creds(auth):
         return render(request, 'employeeDetail.html', context)
+    elif auth and not support.creds(auth):
+        return HttpResponseRedirect('/menu')
     else:
         return HttpResponseRedirect('/login')
     

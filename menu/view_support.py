@@ -70,6 +70,23 @@ def get_new_id():
 
     return employee_id
 
+def create_new_product(form):
+    info = {}
+    img = True
+    try:
+       info['name'] = form['name'].value()
+       info['desc'] = form['desc'].value()
+       info['price'] = float(form['price'].value())
+       info['qavail'] = int(form['qavail'].value())
+       try:
+           info['img'] = form['img'].value()
+       except:
+           img = False
+    except:
+        return False
+
+    if img:
+
 
 
     

@@ -50,25 +50,31 @@ function validateCreateProduct(){
     let error = false;
 
     
+	document.getElementById("name_error").style.display = "none";
+	document.getElementById("desc_error").style.display = "none";
+	document.getElementById("price_error").style.display = "none";
+	document.getElementById("qavail_error").style.display = "none";
 	if(name === ""){
-        console.log('name empty');
+		document.getElementById("name_error").style.display = "";
+		document.getElementById("name_error").style.visibility = "visible";
         error = true;
     }
-    else if(desc === ""){
-        console.log('desc empty');
+    if(desc === ""){
+		document.getElementById("desc_error").style.display = "";
+		document.getElementById("desc_error").style.visibility = "visible";
         error = true;
     }
-    else if(!(isDollar(price))){
-        console.log('not dollar');
+    if(!(isDollar(price))){
+		document.getElementById("price_error").style.display = "";
+		document.getElementById("price_error").style.visibility = "visible";
         error = true;
     }
-    else if(!(isNumeric(qavail))){
-        console.log('not int');
+    if(!(isNumeric(qavail))){
+		document.getElementById("qavail_error").style.display = "";
+		document.getElementById("qavail_error").style.visibility = "visible";
         error = true;
     }
     if (img.length != 0 && !error){
-        console.log(name)
-        console.log(img[0])
         params = {product_name : name, product_desc : desc, product_price : price, product_qavail : qavail, product_img : img};
         post(params, "create_product");
     }

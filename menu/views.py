@@ -105,16 +105,22 @@ def productListing(request):
        return render(request, 'productListing.html', context)
     else:
         return HttpResponseRedirect('/login')
+
 @csrf_exempt
 def createProduct(request):
     auth, employee = support.auth_fetch(request)
     # get context for page
     employee_info = support.get_employee_info(employee)
-    if 'create_product' in request.POST:
-        form = CreateProduct(request.POST)
-        support.create_new_product(form, request.FILES)
+    if request.method == 'POST':
+        if 'logout_click' in request.POST:
+            support.logout(request,auth,employee)
+            auth = False
 
-        pass
+        elif 'create_product' in request.POST:
+            form = CreateProduct(request.POST)
+            support.create_new_product(form, request.FILES)
+
+            pass
 
     if auth and not support.is_temp(auth):
        return render(request, 'createProduct.html', employee_info)

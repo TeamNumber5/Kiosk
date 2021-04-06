@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
-from .forms import ResetDB, logout, CreateProduct
+from .forms import ResetDB, logout, CreateProduct, UpdateProduct
 from login.forms import CreateUser
 from Kiosk.models import Employee, Active_Employee
 from menu.models import Item
@@ -15,7 +15,7 @@ def index(request):
     auth, employee = support.auth_fetch(request)
     # get context for page
     employee_info = support.get_employee_info(employee)
-
+    print(employee_info)
 
 
     if request.method == 'POST':
@@ -101,7 +101,7 @@ def productListing(request):
        '''
        proof of concept code
        '''
-       item = Item.objects.filter(item_id ="78703").first()
+       item = Item.objects.filter(item_id ="32467").first()
        print(item.photo)
        context = support.get_context(employee_info, item)
        print(context['photo'])
@@ -115,19 +115,32 @@ def createProduct(request):
     auth, employee = support.auth_fetch(request)
     # get context for page
     employee_info = support.get_employee_info(employee)
+    context = {}
+    print("files: ")
+    print(request.FILES)
+    context['create_product'] = 0
+    context['update_product'] = 0
     if request.method == 'POST':
         if 'logout_click' in request.POST:
             support.logout(request,auth,employee)
             auth = False
 
         elif 'create_product' in request.POST:
-            form = CreateProduct(request.POST)
-            support.create_new_product(form, request.FILES)
+            form = CreateProduct(request.POST, request.FILES)
+            if(support.create_new_product(form, request.FILES)):
+                context['create_product'] = 1
 
-            pass
+
+        elif 'update_product' in request.POST:
+            form = UpdateProduct(request.POST, request.FILES)
+            if(support.update_product(form,request.FILES)):
+                context['update_product'] = 1
 
     if auth and not support.is_temp(auth):
-       return render(request, 'createProduct.html', employee_info)
+       context.update(support.get_all_items())
+       context.update(employee_info)
+       print(context)
+       return render(request, 'createProduct.html', context)
     else:
         return HttpResponseRedirect('/menu')
     

@@ -2,17 +2,18 @@
 <html>
     {% load static %}
     <head>
-        <title>Product Detail</title>
+        <title >Product Detail</title>
         <link rel="shortcut icon" type="image/png" href="{% static '/img/menu_icon_w.png' %}">
     </head>
 	
 	<link rel="stylesheet" href="{% static '/css/createProduct.css' %}">
     <link rel="stylesheet" href="{% static '/css/menu.css' %}">
-    <script type="text/javascript" src="{% static 'scripts/createProduct.js' %}" defer></script>
+    <script type="text/javascript" data-product_info={{products}} src="{% static '/scripts/createProduct.js' %}">
+    </script>
 	<script type="text/javascript" src="{% static 'scripts/master.js' %}" defer></script>
 
     <body>
-        <h1 id="tmp">Product Detail</h1>
+        <h1 id="tmp" class="heading">Product Detail</h1>
         <div class="info">
             <div class="account">
                 <a>{{role}}</a>
@@ -22,6 +23,11 @@
                 </ul>
             </div>
             <button id="logout_button" type="submit" name="logout_click" ><i class="fa fa-sign-out" aria-hidden="true"></i></button>
+        </div>
+        <div class="sidenav">
+            {% for product in products %}
+            <button class="side-item" id={{product.0}} onclick="fillform({{product.0}})">{{product.0}} {{product.1}}  </button>
+            {% endfor %}
         </div>
         <div class="Form-Container">
             <div class="Form">
@@ -42,10 +48,18 @@
                     <input type="file" id="img"  accept=".jpg, .jpeg, .png">
                 </div>
                 <div class="Button-Container">
-                    <button class="button" name="create_product" onclick="validateCreateProduct()">Submit</button>
+                   <button class="button" name="create_product" id="Submit" onclick="validateCreateProduct()">Submit</button>
                 </div>
+                <div id="product_created" style="display: none" class="error">The product has been made.</div>
+                <div id="product_updated" style="display: none" class="error">The product has been updated.</div>
             </div>
         </div>
+        <script type="text/javascript">
+            product_info={{products|safe}};
+            created = {{create_product|safe}};
+            updated = {{update_product|safe}};
+            init(product_info, created, updated);
+        </script>
 
     </body>
 </html>

@@ -178,3 +178,12 @@ body{
     text-align: center;
     margin-bottom: 5px;
 }
+
+
+.role_select{
+    background: inherit;
+    border-radius: 5px;
+    border: none;
+    padding: 5px;
+    color: white;
+}

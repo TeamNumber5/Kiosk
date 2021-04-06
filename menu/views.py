@@ -91,6 +91,10 @@ def productListing(request):
         if 'logout_click' in request.POST:
             support.logout(request,auth,employee)
             auth = False
+
+        if 'go_create_new' in request.POST:
+            return HttpResponseRedirect('/productListing/createProduct')
+
     
 
     if auth and not support.is_temp(auth):

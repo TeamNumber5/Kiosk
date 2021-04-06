@@ -17,13 +17,14 @@ from django.urls import include, path
 from django.shortcuts import redirect
 from django.conf import settings
 from django.conf.urls.static import static
-from menu.views import productListing, employeeDetail, productDetail
+from menu.views import productListing, employeeDetail, createProduct, productDetail
 
 urlpatterns = [
     path('', lambda request: redirect('login/', permanent=False)),
     path('login/', include('login.urls')),
     path('menu/', include('menu.urls')),
     path('productListing/', productListing),
+    path('productListing/createProduct/', createProduct),
     path('productDetail/', productDetail),
     path('employeeDetail/', employeeDetail),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

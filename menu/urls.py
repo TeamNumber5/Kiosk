@@ -4,4 +4,5 @@ from . import views
 
 urlpatterns = [
     path('', csrf_exempt(views.index), name='index'), 
+    path('createProduct/', views.createProduct, name='createProduct'),
 ] 

@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html>
+    {% load static %}
+    <head>
+        <title>Product Detail</title>
+        <link rel="shortcut icon" type="image/png" href="{% static '/img/menu_icon_w.png' %}">
+    </head>
+	
+	<link rel="stylesheet" href="{% static '/css/createProduct.css' %}">
+    <link rel="stylesheet" href="{% static '/css/menu.css' %}">
+    <script type="text/javascript" src="{% static 'scripts/createProduct.js' %}" defer></script>
+	<script type="text/javascript" src="{% static 'scripts/master.js' %}" defer></script>
+
+    <body>
+        <h1 id="tmp">Product Detail</h1>
+        <div class="info">
+            <div class="account">
+                <a>{{role}}</a>
+                <button id="acc_btn"><a>{{first_name}} {{last_name}}</a></button>
+                <ul>
+                    <li><a>ID: {{employee_id}}</a></li>
+                </ul>
+            </div>
+            <button id="logout_button" type="submit" name="logout_click" ><i class="fa fa-sign-out" aria-hidden="true"></i></button>
+        </div>
+        <div class="Form-Container">
+            <div class="Form">
+                <p class="Box-Head">Name</p>
+                <input class="Box-Input" type="text" id="name"/>
+                    <div id="name_error" style="display: none" class="error">Error: Name cannot be blank</div>
+                <p class=Box-Head>Description</p>
+                <textarea class="Box-Input desc" type="text" id="desc"></textarea>
+                    <div id="desc_error" style="display: none" class="error">Error: Description cannot be blank</div>
+                <p class=Box-Head>Price</p>
+                <input class="Box-Input" type="text" id="price"/>
+                    <div id="price_error" style="display: none" class="error">Error: Price must be dollar amount Ex: 12.01</div>
+                <p class=Box-Head>Quantity Available</p>
+                <input class="Box-Input" type="text" id="qavail"/>
+                    <div id="qavail_error" style="display: none" class="error">Error: Quantitiy Available must be an integer</div>
+                <div class="File-Container">
+                    <p for="img" class="Box-Head">Select image (optional): </label>
+                    <input type="file" id="img"  accept=".jpg, .jpeg, .png">
+                </div>
+                <div class="Button-Container">
+                    <button class="button" name="create_product" onclick="validateCreateProduct()">Submit</button>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>

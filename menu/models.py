@@ -14,7 +14,9 @@ class Item(models.Model):
 
     item_description = models.TextField()
 
-    photo = models.TextField(default="null")
+    item_available = models.IntegerField()
+
+    photo = models.CharField(default="null", max_length=100)
 
 
     # Django auto timestamp creation of user (doens't update upon login)

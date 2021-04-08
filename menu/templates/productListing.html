@@ -35,14 +35,20 @@
         <div class="createbutton">
             <button id="createNewButton" class="{{role}}button" >Create New</button>
         </div>
+        <div class="Card-Container">
+        <div class="Item-Card">
+            <div class="Card-Header">
+                <p>{{item_name}}</p>
+            </div>
+            <div class="Card-Description">
+                <p>Description: {{item_description}}</p>
+            </div>
+            <div class="Card-Footer">
+                <p>ID#: {{item_id}}</p>
+                <p>Price: ${{item_price}} </p>
+            </div>
 
-        <div>
-            <p>{{item_id}}</p>
-            <p>{{item_name}}</p>
-            <p>{{item_price}}</p>
-            <p>{{item_description}}</p>
-            <img src="{{photo}}">
-
+        </div>
         </div>
        
 

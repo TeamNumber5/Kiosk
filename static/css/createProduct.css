@@ -37,6 +37,7 @@ body {
     min-height:70rem;
     justify-content: center;
     align-items: center;
+    min-width:90rem;
 
 }
 .File-Container{

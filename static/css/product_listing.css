@@ -159,6 +159,52 @@ body {
     border-radius: 10px;
 }
 
+.Item-Card{
+    background-color: #EFEFEF;
+    border: 4px solid grey;
+    width: 20vw;
+    min-width:300px;
+    min-height:150px;
+    max-height 200px;
+    display: flex;
+    padding-left:1rem;
+    padding-right:1rem;
+    flex-direction:column;
+    align-items: center;
+    justify-content: center;
+}
+
+.Card-Container{
+    display: flex;
+    justify-content: space-between;
+
+    padding: 2rem;
+}
+
+
+.Card-Footer{
+    display: flex;
+    width:100%;
+    flex-direction:row;
+    align-self: flex-end;
+    flex-direction:row!important;
+    justify-content: space-between;
+    margin-top:4rem;
+
+}
+
+.Card-Description{
+    width:100%;
+    flex-direction:row;
+    font-size:.8rem;
+    align-self: flex-end;
+}
+
+.Card-Header{
+    font-size:2rem;
+
+}
+
 
 
 

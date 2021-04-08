@@ -71,7 +71,8 @@ def productDetail(request):
        proof of concept code
        '''
        item = Item.objects.filter(item_id ="11111").first()
-       context = support.get_context(employee_info, item)
+      # context = support.get_context(employee_info, item)
+        
        
        return render(request, 'productDetail.html', context)
     else:
@@ -83,7 +84,7 @@ def productListing(request):
     # attempt to authorize and get employee
     auth, employee = support.auth_fetch(request)
     # get context for page
-    employee_info = support.get_employee_info(employee)
+    context = support.get_employee_info(employee)
 
     if request.method == 'POST':
 
@@ -101,10 +102,7 @@ def productListing(request):
        '''
        proof of concept code
        '''
-       item = Item.objects.filter(item_id ="32467").first()
-       print(item.photo)
-       context = support.get_context(employee_info, item)
-       print(context['photo'])
+       context.update(support.get_all_items())
        
        return render(request, 'productListing.html', context)
     else:

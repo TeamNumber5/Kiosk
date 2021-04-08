@@ -49,7 +49,7 @@ def is_temp(auth):
     except:
         pass
     return False
-
+'''
 def get_context(employee_info,item):
     context = {"item_id": 'null', "item_name": 'null', "item_price": "null", "item_description": "null", "photo": "null"}
     print(item)
@@ -65,6 +65,7 @@ def get_context(employee_info,item):
         pass
     context.update(employee_info)
     return context
+'''
 
 def get_new_id():
     employee_id = ''.join(random.choice(string.digits) for i in range(5))

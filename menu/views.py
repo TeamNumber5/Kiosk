@@ -87,7 +87,6 @@ def employeeDetail(request):
     auth, employee = support.auth_fetch(request)
     # get context for page
     context = support.get_employee_info(employee)
-
     # Adds a bit more context for the page for form
     # submission error checking
     context['no_users'] = 0
@@ -121,8 +120,9 @@ def employeeDetail(request):
 
             # Ensure role is a manager and create user
             if role == 'GM' or role == 'SM':
-                if(h.attempt_create_user(form,context)):
+                if(h.attempt_create_user(form,context)): # Initial user create
                     auth = False
+                    
 
             # Else the info is invalid
             else:
@@ -132,6 +132,9 @@ def employeeDetail(request):
         else:
             if(h.attempt_create_user(form,context)):
                 context['user_created'] = 1
+                context['new_gen_id'] = support.get_last_created_id()# Saves ID to be displayed
+
+                
 
     if request.method == 'POST':
         # remove active user from db, and remove auth
@@ -140,7 +143,9 @@ def employeeDetail(request):
             auth = False
     
     if auth and support.creds(auth):
-        return render(request, 'employeeDetail.html', context)
+        return render(request, 'employeeDetail.html', context) 
     else:
         return HttpResponseRedirect('/login')
-    
+
+
+

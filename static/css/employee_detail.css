@@ -130,6 +130,7 @@ body{
     margin: 0 10px;
 }
 
+
 .btn{
     width: 80%;
     background: none;
@@ -161,6 +162,7 @@ body{
     margin-right: 20%;
     padding: 13px 0;
 }
+
 
 /* Try to fix the centering on this div*/
 .error_msg{

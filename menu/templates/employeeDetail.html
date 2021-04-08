@@ -22,7 +22,12 @@
         </div>
         </nav>
 
-        
+        {% if user_created == 1 %}
+        <div id="newID" class="textbox">
+            User succesfully created with auto generated ID: {{new_gen_id}}
+        </div>
+        {% endif %}
+
         <div id="createUser" class="create-user">
             <h1>Create User</h1>
             <div class="textbox">

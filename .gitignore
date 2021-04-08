@@ -2,9 +2,12 @@
 __pycache__/
 *.py[cod]
 *~
+
+*.swp
 # C extensions
 *.so
 runserver.sh
+create_users.sh
 
 # No users.txt
 users.txt

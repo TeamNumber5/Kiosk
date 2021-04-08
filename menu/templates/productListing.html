@@ -4,14 +4,23 @@
     <head>
         <title>Product Listing</title>
     </head>
-    	<link rel="stylesheet" href="{% static '/css/menu.css' %}">
+    	<link rel="stylesheet" href="{% static '/css/product_listing.css' %}">
 
 		<script type="text/javascript" src="{% static 'scripts/master.js' %}" defer></script>
+        <script type="text/javascript" src="{% static 'scripts/ProductListing.js' %}" defer></script>
 		
     <body>
         <h1 id="tmp">Product Listing</h1>
+
         <nav>
         <div class="info">
+            <div class="search-box">
+                <input class="search-text" type="text" name="" placeholder="Product to Search">
+                <a class="search-btn" href="#">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                    <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
+                </a>
+            </div>
             <div class="account">
                 <a>{{role}}</a>
                 <button id="acc_btn"><a>{{first_name}} {{last_name}}</a></button>
@@ -21,14 +30,27 @@
             </div>
             <button id="logout_button" type="submit" name="logout_click" ><i class="fa fa-sign-out" aria-hidden="true"></i></button>
         </div>
-        <div>
-            <p>{{item_id}}</p>
-            <p>{{item_name}}</p>
-            <p>${{item_price}}</p>
-            <p>{{item_description}}</p>
-            <img src="{{photo}}">
+    </nav>
+    
+        <div class="createbutton">
+            <button id="createNewButton" class="{{role}}button" >Create New</button>
+        </div>
+        <div class="Card-Container">
+        <div class="Item-Card">
+            <div class="Card-Header">
+                <p>{{item_name}}</p>
+            </div>
+            <div class="Card-Description">
+                <p>Description: {{item_description}}</p>
+            </div>
+            <div class="Card-Footer">
+                <p>ID#: {{item_id}}</p>
+                <p>Price: ${{item_price}} </p>
+            </div>
 
         </div>
-        </nav>
+        </div>
+       
+
    </body>
 </html>

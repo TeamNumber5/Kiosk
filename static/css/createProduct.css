@@ -1,0 +1,95 @@
+@import "https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+body {
+    background-color: bisque;
+}
+.heading{
+    margin-left:170px;
+
+}
+
+.sidenav {
+  height: 100%; /* Full-height: remove this if you want "auto" height */
+  width: 160px; /* Set the width of the sidebar */
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  background-color: grey; /* Black */
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 20px;
+}
+.side-item{
+    width:160px;
+    height:30px;
+
+}
+
+.Form-Container{
+    display: flex;
+    width:100%;
+    margin-top:-5%;
+    height: 80vh;
+    min-height:70rem;
+    justify-content: center;
+    align-items: center;
+    min-width:90rem;
+
+}
+.File-Container{
+    width:90%;
+}
+
+.Form {
+    width: 50%;
+    height:60%;
+    min-height:50rem;
+    border: 3px grey solid;
+    padding:1%;
+}
+
+.Box-Head{
+    font-size: 1.5rem;
+    padding-top: 3%;
+}
+
+.Box-Input {
+    width: 98%;
+    height: 2.5vh;
+    margin-top: .3rem;
+}
+
+
+.desc {
+    height: 7vh !important;
+}
+
+.button {
+    margin-top: 8%;
+    font-family: Hack, monospace;
+    background: #d3d3d3;
+    color: #2c2c2c;
+    cursor: pointer;
+    font-size: 1em;
+    padding: 1.5rem;
+    border: 0;
+    border-radius: 10px;
+    width: 15%;
+    min-width:6rem;
+    position: relative;
+    margin-left: 40.5%;
+}
+
+.Button-Container{
+    width: 100%;
+}
+
+.error {
+    font-size: 1rem;
+}
+
+

@@ -3,8 +3,6 @@ import os
 import random
 import string
 import copy
-from PIL import Image
-import PIL
 from django.http import HttpResponse, HttpResponseRedirect
 from .forms import ResetDB, logout
 from login.forms import CreateUser
@@ -76,11 +74,7 @@ def get_new_id():
 
     return employee_id
 
-def create_new_product(form, img):
-    try:
-        img = img['product_img']
-    except:
-        img= None
+def create_new_product(form):
     item_id = ''.join(random.choice(string.digits) for i in range(5))
     matched = Item.objects.filter(item_id=item_id).first()
     while matched != None:
@@ -102,23 +96,12 @@ def create_new_product(form, img):
         print("failed")
         return False
 
-    if img != None:
-        img = Image.open(img)
-        path = "/static/product_photos/{}.jpg".format(name)
-        img.save(path)
-        item = Item.objects.create(item_id=item_id, item_name=name, item_price=price, item_description=desc, item_available=qavail, photo=path)
-        item.save()
-    else:
-        item = Item.objects.create(item_id=item_id, item_name=name, item_price=price, item_description=desc, item_available=qavail)
-        item.save()
+    item = Item.objects.create(item_id=item_id, item_name=name, item_price=price, item_description=desc, item_available=qavail)
+    item.save()
     return True
 
 
 def update_product(form, img):
-    try:
-        img = img['product_img']
-    except:
-        img= None
     try:
        item_id = str(form['product_id'].value())
        name = str(form['product_name'].value())
@@ -137,13 +120,6 @@ def update_product(form, img):
     item.item_description = desc
     item.item_price = price
     item.item_available = qavail
-    if img != None:
-        img = Image.open(img)
-        path = "/static/product_photos/{}.jpg".format(name)
-        img.save(path)
-        item.photo = path
-    else:
-        item.photo = 'null'
     item.save()
     return True
 
@@ -162,7 +138,6 @@ def get_all_items():
         product.append(float(item.item_price))
         product.append(item.item_description)
         product.append(item.item_available)
-        product.append(item.photo)
         context.append(copy.deepcopy(product))
     all_items['products'] = context
     return all_items

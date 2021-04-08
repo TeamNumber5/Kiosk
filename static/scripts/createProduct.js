@@ -11,14 +11,7 @@ function post(params, form_name) {
       const hiddenField = document.createElement('input');
       hiddenField.type = 'hidden';
       hiddenField.name = key;
-      if (key == "product_img"){
-        hiddenField.type="file";
-        hiddenField.files = params[key];
-      }
-      else{
       hiddenField.value = params[key];
-      }
-
       form.appendChild(hiddenField);
     }
   }
@@ -48,7 +41,6 @@ function validateCreateProduct(){
     let desc = document.getElementById("desc").value;
     let price = document.getElementById("price").value;
     let qavail = document.getElementById("qavail").value;
-    let img = document.getElementById("img").files;
     let error = false;
 
     
@@ -77,28 +69,18 @@ function validateCreateProduct(){
         error = true;
     }
 
-    if (img.length != 0 && !error){
+    if (!error){
         if (document.getElementById("Submit").innerHTML === "Update"){
-            params = {product_id : document.getElementById("Submit").value, product_name : name, product_desc : desc, product_price : price, product_qavail : qavail, product_img : img};
+            params = {product_id : document.getElementById("Submit").value, product_name : name, product_desc : desc, product_price : price, product_qavail : qavail};
             post(params, "update_product");
         }
         else{
-            params = {product_name : name, product_desc : desc, product_price : price, product_qavail : qavail, product_img : img};
+            params = {product_name : name, product_desc : desc, product_price : price, product_qavail : qavail};
             post(params, "create_product");
         }
     }
 
 
-    else if (!error){
-        if (document.getElementById("Submit").innerHTML == "Update"){
-            params = {product_id : document.getElementById("Submit").value, product_name : name, product_desc : desc, product_price : price, product_qavail : qavail, product_img : img};
-            post(params, "update_product");
-        }
-        else {
-            params = {product_name : name, product_desc : desc, product_price : price, product_qavail : qavail, product_img : img};
-            post(params, "create_product");
-        }
-    }
 
 }
 

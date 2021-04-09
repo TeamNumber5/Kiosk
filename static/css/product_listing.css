@@ -152,7 +152,7 @@ body {
     position: relative;
     font-size: 20px;
     margin-left: 45%;
-    margin-right: 40%: 
+    margin-right: 40%; 
     width: 20%;
     height: 50px;
     cursor: auto;
@@ -161,11 +161,11 @@ body {
 
 .Item-Card{
     background-color: #EFEFEF;
-    border: 4px solid grey;
+    border: 3px solid black;
     width: 20vw;
     min-width:300px;
     min-height:150px;
-    max-height 200px;
+    max-height: 200px;
     cursor: pointer;
     display: flex;
     padding-left:1rem;
@@ -173,13 +173,21 @@ body {
     flex-direction:column;
     align-items: center;
     justify-content: center;
+    margin: 5px;
 }
 
 .Card-Container{
+    
+/*
     display: flex;
+    justify-content: space-between;
+*/
+    display: inline-flex;
+    flex-wrap: wrap;
     justify-content: space-between;
 
     padding: 2rem;
+    
 }
 
 

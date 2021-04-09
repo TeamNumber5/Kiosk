@@ -47,23 +47,6 @@ def is_temp(auth):
     except:
         pass
     return False
-'''
-def get_context(employee_info,item):
-    context = {"item_id": 'null', "item_name": 'null', "item_price": "null", "item_description": "null", "photo": "null"}
-    print(item)
-    try:
-        item_id = item.item_id
-        item_name = item.item_name
-        item_price = item.item_price
-        item_description = item.item_description
-        photo = item.photo
-        context = {"item_id": item_id, "item_name": item_name, "item_price": item_price, "item_description": item_description, "photo": photo}
-    except:
-        print("caught")
-        pass
-    context.update(employee_info)
-    return context
-'''
 
 def get_new_id():
     employee_id = ''.join(random.choice(string.digits) for i in range(5))
@@ -73,6 +56,12 @@ def get_new_id():
         matched = Employee.objects.filter(employee_id=employee_id).first()
 
     return employee_id
+
+
+# Returns the most recently created employee ID in the db
+def get_last_created_id():
+    createdEmployee = Employee.objects.latest('record_id')
+    return createdEmployee.employee_id
 
 def create_new_product(form):
     item_id = ''.join(random.choice(string.digits) for i in range(5))

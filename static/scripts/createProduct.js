@@ -84,6 +84,7 @@ function validateCreateProduct(){
 
 }
 
+
 function logout_click(){
     params = {};
     post(params, 'logout_click');
@@ -94,7 +95,6 @@ function fillform(id){
     if (typeof product === 'undefined')
         return;
     for (let i = 0; i < product.length; i++){
-        console.log(product[i][0], String(id))
         if (product[i][0] == id){
             document.getElementById("name").value = product[i][1];
             document.getElementById("desc").value = product[i][3];
@@ -105,17 +105,56 @@ function fillform(id){
 
         }
     }
+    if (role != "CS"){
+    document.getElementById("cancel").visibility = "visible";
+    document.getElementById("cancel").style.display="";
+    }
 
 }
 
-function init(product_info, c, u){
+function unfillform(){
+    document.getElementById("name").value = null;
+    document.getElementById("desc").value = null;
+    document.getElementById("price").value = null;
+    document.getElementById("qavail").value = null;
+    document.getElementById("Submit").value = 0 
+    document.getElementById("Submit").innerHTML= "Submit";
+    document.getElementById("cancel").style.display="none";
+
+
+}
+
+function init(product_info, c, u, t, r){
     if (c == 1){
         document.getElementById("product_created").style.display="";
         document.getElementById("product_created").style.visibility = "visible"; 
     }
-    else if (u == 1){
+    if (t != 0){
+        document.getElementById("name").value = t[1];
+        document.getElementById("desc").value = t[3];
+        document.getElementById("price").value = t[2];
+        document.getElementById("qavail").value = t[4];
+        document.getElementById("Submit").value = t[0]
+        document.getElementById("Submit").innerHTML= "Update";
+        document.getElementById("cancel").visibility = "visible";
+        document.getElementById("cancel").style.display="";
+
+    }
+    if (u == 1){
         document.getElementById("product_updated").style.display="";
         document.getElementById("product_updated").style.visibility = "visible";
+        unfillform();
+
     }
+    if (r == 'CS'){
+        document.getElementById("name").readOnly = true;
+        document.getElementById("desc").readOnly = true;
+        document.getElementById("price").readOnly = true;
+        document.getElementById("qavail").readOnly = true;
+		document.getElementById("Submit").style.display = "none";
+		document.getElementById("Submit").style.visibility = "hidden";
+        document.getElementById("cancel").style.display="none";
+    }
+    role = r    
     product = product_info;
 }

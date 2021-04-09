@@ -69,7 +69,7 @@ body {
 }
 
 .button {
-    margin-top: 8%;
+    margin-top: 4%;
     font-family: Hack, monospace;
     background: #d3d3d3;
     color: #2c2c2c;
@@ -90,6 +90,10 @@ body {
 
 .error {
     font-size: 1rem;
+}
+
+#cancel{
+    font-size: .7rem !important;
 }
 
 

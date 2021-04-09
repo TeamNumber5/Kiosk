@@ -101,7 +101,7 @@ def create_new_product(form):
     return True
 
 
-def update_product(form, img):
+def update_product(form):
     try:
        item_id = str(form['product_id'].value())
        name = str(form['product_name'].value())
@@ -171,7 +171,7 @@ def delete_tmp_user():
 
 def logout(request, auth, employee):
     try:
-        del request.session['session_key']
+        request.session.clear()
         auth.delete()
         employee.active = False
     except:

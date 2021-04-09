@@ -1,4 +1,6 @@
-
+/*
+ * Handles post request
+ */
 function post(params, form_name) {
 
   const form = document.createElement('form');
@@ -24,51 +26,62 @@ function post(params, form_name) {
   form.submit();
 }
 
-
-
+/*
+ * Checks if the value is a dollar amount
+ */
 function isDollar(value)
 {
 	return /^\d+(?:\.\d{0,2})$/.test(value);
 }
-
+/*
+ * Checks if the value is a whole number
+ */
 function isNumeric(value)
 {
 	return /^\d+$/.test(value);
 }
-
+/*
+ * Validates user fields
+ */
 function validateCreateProduct(){
+    // Get the value from the html fields
     let name = document.getElementById("name").value;
     let desc = document.getElementById("desc").value;
     let price = document.getElementById("price").value;
     let qavail = document.getElementById("qavail").value;
     let error = false;
 
-    
+    // Sets the errors to none 
 	document.getElementById("name_error").style.display = "none";
 	document.getElementById("desc_error").style.display = "none";
 	document.getElementById("price_error").style.display = "none";
 	document.getElementById("qavail_error").style.display = "none";
+
+    // if name is empty print error
 	if(name === ""){
 		document.getElementById("name_error").style.display = "";
 		document.getElementById("name_error").style.visibility = "visible";
         error = true;
     }
+    // if description is empty print error
     if(desc === ""){
 		document.getElementById("desc_error").style.display = "";
 		document.getElementById("desc_error").style.visibility = "visible";
         error = true;
     }
+    // If not dollar amount print error
     if(!(isDollar(price))){
 		document.getElementById("price_error").style.display = "";
 		document.getElementById("price_error").style.visibility = "visible";
         error = true;
     }
+    // If quantity available is not whole number print error
     if(!(isNumeric(qavail))){
 		document.getElementById("qavail_error").style.display = "";
 		document.getElementById("qavail_error").style.visibility = "visible";
         error = true;
     }
-
+    // If there are no errors either submit new product or update
     if (!error){
         if (document.getElementById("Submit").innerHTML === "Update"){
             params = {product_id : document.getElementById("Submit").value, product_name : name, product_desc : desc, product_price : price, product_qavail : qavail};
@@ -90,7 +103,9 @@ function logout_click(){
     post(params, 'logout_click');
 
 }
-
+/*
+ * Fills the form with database info
+ */
 function fillform(id){
     if (typeof product === 'undefined')
         return;
@@ -102,9 +117,11 @@ function fillform(id){
             document.getElementById("qavail").value = product[i][4];
             document.getElementById("Submit").value = String(id)
             document.getElementById("Submit").innerHTML= "Update";
+            if (role != "CS"){
             document.getElementById("Delete").value = String(id)
             document.getElementById("Delete").style.display="";
             document.getElementById("Delete").style.visibility = "visible";
+            }
         }
     }
     if (role != "CS"){
@@ -112,8 +129,16 @@ function fillform(id){
     document.getElementById("cancel").style.display="";
     }
 
+	document.getElementById("name_error").style.display = "none";
+	document.getElementById("desc_error").style.display = "none";
+	document.getElementById("price_error").style.display = "none";
+	document.getElementById("qavail_error").style.display = "none";
+    document.getElementById("product_updated").style.display="none";
+    document.getElementById("product_created").style.display="none";
 }
-
+/*
+ * Removes items from field along with cancel and update buttons
+ */
 function unfillform(){
     document.getElementById("name").value = null;
     document.getElementById("desc").value = null;
@@ -122,10 +147,17 @@ function unfillform(){
     document.getElementById("Submit").value = 0 
     document.getElementById("Submit").innerHTML= "Submit";
     document.getElementById("cancel").style.display="none";
-
+    document.getElementById("Delete").style.display="none";
+    document.getElementById("Delete").style.visibility = "hidden";
+	document.getElementById("name_error").style.display = "none";
+	document.getElementById("desc_error").style.display = "none";
+	document.getElementById("price_error").style.display = "none";
+	document.getElementById("qavail_error").style.display = "none";
 
 }
-
+/*
+ * Handles view initialization
+ */
 function init(product_info, c, u, t, r){
     if (c == 1){
         document.getElementById("product_created").style.display="";

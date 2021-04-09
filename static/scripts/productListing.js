@@ -39,7 +39,9 @@ function post(params, form_name) {
   form.submit();
 }
 
-
+/*
+ * Creates the product card and event listener
+ */
 function init_list(product_info){
    product = product_info;
 

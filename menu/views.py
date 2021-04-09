@@ -96,7 +96,8 @@ def productListing(request):
         if 'logout_click' in request.POST:
             support.logout(request,auth,employee)
             auth = False
-
+        
+        # Go's to create product page
         if 'go_create_new' in request.POST:
             try:
                 del request.session['to_update'] 
@@ -104,6 +105,7 @@ def productListing(request):
                 pass
             return HttpResponseRedirect('/productListing/createProduct')
 
+        # Go's to create product page with product loaded to update
         if 'go_update' in request.POST:
             form = GoUpdate(request.POST)
             try:
@@ -116,7 +118,7 @@ def productListing(request):
             return HttpResponseRedirect('/productListing/createProduct')
 
     
-
+    # If the user is authed render the page with context
     if auth and not support.is_temp(auth):
        context.update(support.get_all_items())
        
@@ -140,47 +142,54 @@ def createProduct(request):
         return (HttpResponseRedirect('/productListing/'))
 
     if request.method == 'POST':
+        # Handles logout
         if 'logout_click' in request.POST:
             support.logout(request,auth,employee)
             auth = False
 
+        # Handles create product
         elif 'create_product' in request.POST:
             form = CreateProduct(request.POST)
             if(support.create_new_product(form)):
                 context['create_product'] = 1
 
-
+        # handles update product
         elif 'update_product' in request.POST:
             form = UpdateProduct(request.POST)
             if(support.update_product(form)):
                 context['update_product'] = 1
-
+        # Deletes product 
         elif 'delete_product' in request.POST:
             form = DeleteProduct(request.POST)
-            print(form)
             if(support.delete_product(form)):
                 return (HttpResponseRedirect('/productListing/'))
-
+    # if the user is authd
     if auth and not support.is_temp(auth):
         try:
+            # Gets the item to update from teh user session
             to_update = request.session['to_update']
         except:
+            # If there is no item to update get other context
             context.update(support.get_all_items())
             context.update(employee_info)
             return render(request, 'createProduct.html', context)
+        try:
+            # Get the item to updates information
+            item  = Item.objects.get(item_id=to_update)
+            item_wrap = {}
+            load_item = []
+            load_item.append(to_update)
+            load_item.append(item.item_name)
+            load_item.append(float(item.item_price))
+            load_item.append(item.item_description)
+            load_item.append(item.item_available)
+            item_wrap['to_update'] = load_item
+            context.update(item_wrap)
+            context.update(support.get_all_items())
+            context.update(employee_info)
+        except:
+            pass
 
-        item  = Item.objects.get(item_id=to_update)
-        item_wrap = {}
-        load_item = []
-        load_item.append(to_update)
-        load_item.append(item.item_name)
-        load_item.append(float(item.item_price))
-        load_item.append(item.item_description)
-        load_item.append(item.item_available)
-        item_wrap['to_update'] = load_item
-        context.update(item_wrap)
-        context.update(support.get_all_items())
-        context.update(employee_info)
         return render(request, 'createProduct.html', context)
 
     else:

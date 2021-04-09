@@ -63,47 +63,49 @@ def get_last_created_id():
     createdEmployee = Employee.objects.latest('record_id')
     return createdEmployee.employee_id
 
+
+'''
+Creates a new product
+'''
 def create_new_product(form):
+    # generate new ID unique id
     item_id = ''.join(random.choice(string.digits) for i in range(5))
     matched = Item.objects.filter(item_id=item_id).first()
     while matched != None:
         item_id = ''.join(random.choice(string.digits) for i in range(5))
         matched = Item.objects.filter(item_id=item_id).first()
-    print(item_id)
+
+    # get the information from the form
     info = {}
     try:
        name = str(form['product_name'].value())
-       print(name)
        desc = str(form['product_desc'].value())
-       print(desc)
        price = float(form['product_price'].value())
-       print(price)
        qavail = int(form['product_qavail'].value())
-       print(qavail)
        
     except:
         print("failed")
         return False
-
+    # Create the object from the form information
     item = Item.objects.create(item_id=item_id, item_name=name, item_price=price, item_description=desc, item_available=qavail)
     item.save()
     return True
 
-
+'''
+Updates and existing item
+'''
 def update_product(form):
+    # Get the information from the form
     try:
        item_id = str(form['product_id'].value())
        name = str(form['product_name'].value())
-       print(name)
        desc = str(form['product_desc'].value())
-       print(desc)
        price = float(form['product_price'].value())
-       print(price)
        qavail = int(form['product_qavail'].value())
-       print(qavail)
     except:
         print("failed")
         return False
+    # Get the object, update, save
     item  = Item.objects.get(item_id=item_id)
     item.item_name = name
     item.item_description = desc
@@ -112,18 +114,25 @@ def update_product(form):
     item.save()
     return True
 
-
+'''
+deletes an existing product
+'''
 def delete_product(form):
+    # Try to get the infromation from the form
     try:
        item_id = str(form['product_id'].value())
+       item  = Item.objects.get(item_id=item_id)
+       item.delete()
     except:
         print("failed")
         return False
-    item  = Item.objects.get(item_id=item_id)
-    item.delete()
-    return True
 
+    return True
+'''
+Gets all of the items
+'''
 def get_all_items():
+    # Get all the items from the database
     items = Item.objects.all()
     all_items = {}
     context = []
@@ -137,12 +146,6 @@ def get_all_items():
         context.append(copy.deepcopy(product))
     all_items['products'] = context
     return all_items
-
-
-
-
-    
-    
 
 
 def get_employee_info(employee):

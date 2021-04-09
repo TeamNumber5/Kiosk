@@ -47,7 +47,7 @@
                 <div class="Button-Container">
                     <button class="button" name="create_product" id="Submit" value={{update_product}} onclick="validateCreateProduct()">Submit</button>
                     <button class="button cancel" name="cancel" id="cancel" style="display:none" onclick="unfillform()">Cancel Update</button>
-                    <button class="button" id="Delete" value={{to_update.0}} onclick="deleteProduct()">Delete Product</button>
+                    <button class="button" id="Delete" onclick="deleteProduct()" value={{to_update.0}} >Delete Product</button>
                 </div>
                 <div id="product_created" style="display: none" class="error">The product has been made.</div>
                 <div id="product_updated" style="display: none" class="error">The product has been updated.</div>

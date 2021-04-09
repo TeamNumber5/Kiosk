@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
-from .forms import ResetDB, logout, CreateProduct, UpdateProduct, GoUpdate
+from .forms import ResetDB, logout, CreateProduct, UpdateProduct, GoUpdate, DeleteProduct
 from login.forms import CreateUser
 from Kiosk.models import Employee, Active_Employee
 from menu.models import Item
@@ -154,6 +154,12 @@ def createProduct(request):
             form = UpdateProduct(request.POST)
             if(support.update_product(form)):
                 context['update_product'] = 1
+
+        elif 'delete_product' in request.POST:
+            form = DeleteProduct(request.POST)
+            print(form)
+            if(support.delete_product(form)):
+                return (HttpResponseRedirect('/productListing/'))
 
     if auth and not support.is_temp(auth):
         try:

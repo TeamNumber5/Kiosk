@@ -113,8 +113,15 @@ def update_product(form):
     return True
 
 
-
-
+def delete_product(form):
+    try:
+       item_id = str(form['product_id'].value())
+    except:
+        print("failed")
+        return False
+    item  = Item.objects.get(item_id=item_id)
+    item.delete()
+    return True
 
 def get_all_items():
     items = Item.objects.all()

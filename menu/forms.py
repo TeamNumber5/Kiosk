@@ -23,3 +23,5 @@ class UpdateProduct(forms.Form):
 class GoUpdate(forms.Form):
     product_id =     forms.CharField(label='product_id', max_length=5)
 
+class DeleteProduct(forms.Form):
+    product_id =     forms.CharField(label='product_id', max_length=5)

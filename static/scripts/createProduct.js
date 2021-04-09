@@ -102,7 +102,9 @@ function fillform(id){
             document.getElementById("qavail").value = product[i][4];
             document.getElementById("Submit").value = String(id)
             document.getElementById("Submit").innerHTML= "Update";
-
+            document.getElementById("Delete").value = String(id)
+            document.getElementById("Delete").style.display="";
+            document.getElementById("Delete").style.visibility = "visible";
         }
     }
     if (role != "CS"){
@@ -140,6 +142,10 @@ function init(product_info, c, u, t, r){
         document.getElementById("cancel").style.display="";
 
     }
+    if (t==0){
+        document.getElementById("Delete").style.display="none";
+        document.getElementById("Delete").style.visibility = "hidden";
+    }
     if (u == 1){
         document.getElementById("product_updated").style.display="";
         document.getElementById("product_updated").style.visibility = "visible";
@@ -154,17 +160,28 @@ function init(product_info, c, u, t, r){
 		document.getElementById("Submit").style.display = "none";
 		document.getElementById("Submit").style.visibility = "hidden";
         document.getElementById("cancel").style.display="none";
+        document.getElementById("Delete").style.display="none";
+        document.getElementById("Delete").style.visibility = "hidden";
     }
     role = r    
     product = product_info;
 }
 
 /*
- * Function for returning the user to the menu
+ * Function for returning the user to the product listing
  */
 
 function back(){
     params = {}
     post(params, 'back')
 
+}
+
+/*
+ * Function to delete product
+ */
+function deleteProduct(){
+    console.log(document.getElementById("Delete").value)
+    params = {product_id : document.getElementById("Delete").value}
+    post(params, 'delete_product')
 }

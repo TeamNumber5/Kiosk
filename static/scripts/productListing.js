@@ -52,3 +52,11 @@ function init_list(product_info){
    }
 }
 
+/*
+ * Function for returning the user to the menu
+ */
+function back(){
+    params = {}
+    post(params, 'back')
+
+}

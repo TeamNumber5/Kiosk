@@ -158,3 +158,13 @@ function init(product_info, c, u, t, r){
     role = r    
     product = product_info;
 }
+
+/*
+ * Function for returning the user to the menu
+ */
+
+function back(){
+    params = {}
+    post(params, 'back')
+
+}

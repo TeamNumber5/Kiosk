@@ -85,6 +85,11 @@ def productListing(request):
     # get context for page
     context = support.get_employee_info(employee)
 
+    # Back button that returns to menu, and restricts
+    # temporary user from accessing
+    if 'back' in request.POST and not support.is_temp(auth):
+        return (HttpResponseRedirect('/menu/'))
+
     if request.method == 'POST':
 
         # remove active user from db, and remove auth
@@ -128,6 +133,12 @@ def createProduct(request):
     context['create_product'] = 0
     context['update_product'] = 0
     context['to_update'] = 0
+
+    # Back button that returns to menu, and restricts
+    # temporary user from accessing
+    if 'back' in request.POST and not support.is_temp(auth):
+        return (HttpResponseRedirect('/productListing/'))
+
     if request.method == 'POST':
         if 'logout_click' in request.POST:
             support.logout(request,auth,employee)

@@ -13,7 +13,8 @@
 	<script type="text/javascript" src="{% static 'scripts/master.js' %}" defer></script>
 
     <body>
-        <h1 id="tmp" class="heading">Product Detail</h1>
+<!--        <h1 id="tmp" class="heading">Product Detail</h1>-->
+        <button class="backButton" onclick="back()"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
         <div class="info">
             <div class="account">
                 <a>{{role}}</a>
@@ -46,6 +47,7 @@
                 <div class="Button-Container">
                     <button class="button" name="create_product" id="Submit" value={{update_product}} onclick="validateCreateProduct()">Submit</button>
                     <button class="button cancel" name="cancel" id="cancel" style="display:none" onclick="unfillform()">Cancel Update</button>
+                    <button class="button">Delete Product</button>
                 </div>
                 <div id="product_created" style="display: none" class="error">The product has been made.</div>
                 <div id="product_updated" style="display: none" class="error">The product has been updated.</div>

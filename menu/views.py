@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
-from .forms import ResetDB, logout, CreateProduct, UpdateProduct
+from .forms import ResetDB, logout, CreateProduct, UpdateProduct, GoUpdate
 from login.forms import CreateUser
 from Kiosk.models import Employee, Active_Employee
 from menu.models import Item
@@ -15,7 +15,6 @@ def index(request):
     auth, employee = support.auth_fetch(request)
     # get context for page
     employee_info = support.get_employee_info(employee)
-    print(employee_info)
 
 
     if request.method == 'POST':
@@ -71,7 +70,8 @@ def productDetail(request):
        proof of concept code
        '''
        item = Item.objects.filter(item_id ="11111").first()
-       context = support.get_context(employee_info, item)
+      # context = support.get_context(employee_info, item)
+        
        
        return render(request, 'productDetail.html', context)
     else:
@@ -83,7 +83,7 @@ def productListing(request):
     # attempt to authorize and get employee
     auth, employee = support.auth_fetch(request)
     # get context for page
-    employee_info = support.get_employee_info(employee)
+    context = support.get_employee_info(employee)
 
     if request.method == 'POST':
 
@@ -93,18 +93,27 @@ def productListing(request):
             auth = False
 
         if 'go_create_new' in request.POST:
+            try:
+                del request.session['to_update'] 
+            except:
+                pass
+            return HttpResponseRedirect('/productListing/createProduct')
+
+        if 'go_update' in request.POST:
+            form = GoUpdate(request.POST)
+            try:
+                request.session['to_update'] = form['product_id'].value()
+            except:
+                context.update(support.get_all_items())
+       
+                return render(request, 'productListing.html', context)
+
             return HttpResponseRedirect('/productListing/createProduct')
 
     
 
     if auth and not support.is_temp(auth):
-       '''
-       proof of concept code
-       '''
-       item = Item.objects.filter(item_id ="32467").first()
-       print(item.photo)
-       context = support.get_context(employee_info, item)
-       print(context['photo'])
+       context.update(support.get_all_items())
        
        return render(request, 'productListing.html', context)
     else:
@@ -116,31 +125,47 @@ def createProduct(request):
     # get context for page
     employee_info = support.get_employee_info(employee)
     context = {}
-    print("files: ")
-    print(request.FILES)
     context['create_product'] = 0
     context['update_product'] = 0
+    context['to_update'] = 0
     if request.method == 'POST':
         if 'logout_click' in request.POST:
             support.logout(request,auth,employee)
             auth = False
 
         elif 'create_product' in request.POST:
-            form = CreateProduct(request.POST, request.FILES)
-            if(support.create_new_product(form, request.FILES)):
+            form = CreateProduct(request.POST)
+            if(support.create_new_product(form)):
                 context['create_product'] = 1
 
 
         elif 'update_product' in request.POST:
-            form = UpdateProduct(request.POST, request.FILES)
-            if(support.update_product(form,request.FILES)):
+            form = UpdateProduct(request.POST)
+            if(support.update_product(form)):
                 context['update_product'] = 1
 
     if auth and not support.is_temp(auth):
-       context.update(support.get_all_items())
-       context.update(employee_info)
-       print(context)
-       return render(request, 'createProduct.html', context)
+        try:
+            to_update = request.session['to_update']
+        except:
+            context.update(support.get_all_items())
+            context.update(employee_info)
+            return render(request, 'createProduct.html', context)
+
+        item  = Item.objects.get(item_id=to_update)
+        item_wrap = {}
+        load_item = []
+        load_item.append(to_update)
+        load_item.append(item.item_name)
+        load_item.append(float(item.item_price))
+        load_item.append(item.item_description)
+        load_item.append(item.item_available)
+        item_wrap['to_update'] = load_item
+        context.update(item_wrap)
+        context.update(support.get_all_items())
+        context.update(employee_info)
+        return render(request, 'createProduct.html', context)
+
     else:
         return HttpResponseRedirect('/menu')
     

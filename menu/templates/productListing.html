@@ -7,7 +7,9 @@
     	<link rel="stylesheet" href="{% static '/css/product_listing.css' %}">
 
 		<script type="text/javascript" src="{% static 'scripts/master.js' %}" defer></script>
-        <script type="text/javascript" src="{% static 'scripts/ProductListing.js' %}" defer></script>
+        <script type="text/javascript" src="{% static 'scripts/productListing.js' %}" defer></script>
+        <script type="text/javascript" data-valid_info="{{products}}" src="{% static '/scripts/productListing.js' %}">
+        </script>
 		
     <body>
         <h1 id="tmp">Product Listing</h1>
@@ -15,7 +17,7 @@
         <nav>
         <div class="info">
             <div class="search-box">
-                <input class="search-text" type="text" name="" placeholder="Product to Search">
+                <input class="search-text" type="text" name="" placeholder="For Later Sprints">
                 <a class="search-btn" href="#">
                     <i class="fa fa-search" aria-hidden="true"></i>
                     <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
@@ -36,20 +38,28 @@
             <button id="createNewButton" class="{{role}}button" >Create New</button>
         </div>
         <div class="Card-Container">
-        <div class="Item-Card">
+        {% for product in products %}
+        <div id="{{product.0}}" class="Item-Card">
             <div class="Card-Header">
-                <p>{{item_name}}</p>
+                <p>{{product.1}}</p>
             </div>
             <div class="Card-Description">
-                <p>Description: {{item_description}}</p>
+                <p>Description: {{product.3}}</p>
             </div>
             <div class="Card-Footer">
-                <p>ID#: {{item_id}}</p>
-                <p>Price: ${{item_price}} </p>
+                <p>ID#: {{product.0}}</p>
+                <p>Q: {{product.4}}</p>
+                <p>Price: ${{product.2}} </p>
             </div>
 
         </div>
+        {% endfor %}
+
         </div>
+        <script type="text/javascript">
+            product_info={{products|safe}};
+            init_list(product_info);
+        </script>
        
 
    </body>

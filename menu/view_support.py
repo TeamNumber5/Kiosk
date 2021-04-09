@@ -3,8 +3,6 @@ import os
 import random
 import string
 import copy
-from PIL import Image
-import PIL
 from django.http import HttpResponse, HttpResponseRedirect
 from .forms import ResetDB, logout
 from login.forms import CreateUser
@@ -50,22 +48,6 @@ def is_temp(auth):
         pass
     return False
 
-def get_context(employee_info,item):
-    context = {"item_id": 'null', "item_name": 'null', "item_price": "null", "item_description": "null", "photo": "null"}
-    print(item)
-    try:
-        item_id = item.item_id
-        item_name = item.item_name
-        item_price = item.item_price
-        item_description = item.item_description
-        photo = item.photo
-        context = {"item_id": item_id, "item_name": item_name, "item_price": item_price, "item_description": item_description, "photo": photo}
-    except:
-        print("caught")
-        pass
-    context.update(employee_info)
-    return context
-
 def get_new_id():
     employee_id = ''.join(random.choice(string.digits) for i in range(5))
     matched = Employee.objects.filter(employee_id=employee_id).first()
@@ -81,11 +63,7 @@ def get_last_created_id():
     createdEmployee = Employee.objects.latest('record_id')
     return createdEmployee.employee_id
 
-def create_new_product(form, img):
-    try:
-        img = img['product_img']
-    except:
-        img= None
+def create_new_product(form):
     item_id = ''.join(random.choice(string.digits) for i in range(5))
     matched = Item.objects.filter(item_id=item_id).first()
     while matched != None:
@@ -107,23 +85,12 @@ def create_new_product(form, img):
         print("failed")
         return False
 
-    if img != None:
-        img = Image.open(img)
-        path = "/static/product_photos/{}.jpg".format(name)
-        img.save(path)
-        item = Item.objects.create(item_id=item_id, item_name=name, item_price=price, item_description=desc, item_available=qavail, photo=path)
-        item.save()
-    else:
-        item = Item.objects.create(item_id=item_id, item_name=name, item_price=price, item_description=desc, item_available=qavail)
-        item.save()
+    item = Item.objects.create(item_id=item_id, item_name=name, item_price=price, item_description=desc, item_available=qavail)
+    item.save()
     return True
 
 
-def update_product(form, img):
-    try:
-        img = img['product_img']
-    except:
-        img= None
+def update_product(form):
     try:
        item_id = str(form['product_id'].value())
        name = str(form['product_name'].value())
@@ -142,13 +109,6 @@ def update_product(form, img):
     item.item_description = desc
     item.item_price = price
     item.item_available = qavail
-    if img != None:
-        img = Image.open(img)
-        path = "/static/product_photos/{}.jpg".format(name)
-        img.save(path)
-        item.photo = path
-    else:
-        item.photo = 'null'
     item.save()
     return True
 
@@ -167,7 +127,6 @@ def get_all_items():
         product.append(float(item.item_price))
         product.append(item.item_description)
         product.append(item.item_available)
-        product.append(item.photo)
         context.append(copy.deepcopy(product))
     all_items['products'] = context
     return all_items
@@ -201,7 +160,7 @@ def delete_tmp_user():
 
 def logout(request, auth, employee):
     try:
-        del request.session['session_key']
+        request.session.clear()
         auth.delete()
         employee.active = False
     except:

@@ -43,12 +43,9 @@
                 <p class=Box-Head>Quantity Available</p>
                 <input class="Box-Input" type="text" id="qavail"/>
                     <div id="qavail_error" style="display: none" class="error">Error: Quantitiy Available must be an integer</div>
-                <div class="File-Container">
-                    <p for="img" class="Box-Head">Select image (optional): </label>
-                    <input type="file" id="img"  accept=".jpg, .jpeg, .png">
-                </div>
                 <div class="Button-Container">
-                   <button class="button" name="create_product" id="Submit" onclick="validateCreateProduct()">Submit</button>
+                    <button class="button" name="create_product" id="Submit" value={{update_product}} onclick="validateCreateProduct()">Submit</button>
+                    <button class="button cancel" name="cancel" id="cancel" style="display:none" onclick="unfillform()">Cancel Update</button>
                 </div>
                 <div id="product_created" style="display: none" class="error">The product has been made.</div>
                 <div id="product_updated" style="display: none" class="error">The product has been updated.</div>
@@ -58,7 +55,9 @@
             product_info={{products|safe}};
             created = {{create_product|safe}};
             updated = {{update_product|safe}};
-            init(product_info, created, updated);
+            to_update = {{to_update|safe}};
+            role = '{{role|safe}}';
+            init(product_info, created, updated, to_update, role);
         </script>
 
     </body>

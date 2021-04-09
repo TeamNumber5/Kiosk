@@ -4,6 +4,9 @@ document.addEventListener('DOMContentLoaded', () =>  {
 });
 
 
+
+
+
 function post(params, form_name) {
 
   const form = document.createElement('form');
@@ -35,3 +38,17 @@ function post(params, form_name) {
   document.body.appendChild(form);
   form.submit();
 }
+
+
+function init_list(product_info){
+   product = product_info;
+
+   for (let i = 0; i < product.length; i++){
+    document.addEventListener('DOMContentLoaded', () =>  {
+
+	     document.getElementById(product[i][0]).addEventListener('click', () => { params = {product_id: product[i][0]}; name='go_update'; post(params, name);});
+    });
+        
+   }
+}
+
